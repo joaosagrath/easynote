@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página com Botões Laterais</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" href="financeiro.css"><!-- Link para o arquivo CSS -->
+</head>
+<body>
+	
+    <div class="sidebar">
+		<div class="logo-container">
+			<img src="../resources/icon.png" alt="Descrição da Imagem" class="class-logo">
+		</div>
+        <a href="#" id="link-emprestimo">EMPRÉSTIMO</a>
+    <a href="#" id="link-equipamentos">EQUIPAMENTOS</a>
+    <a href="#" id="link-listagem">LISTAGEM</a>
+    <a href="#" id="link-historico">HISTÓRICO</a>
+		
+    </div>
+	
+    <div class="content">
+        <div id="emprestimo">
+			<div class="painel" style="height: 100%; width: 100%; text-align: center">								
+				
+				<div id="painel-emprestimo" class="painel-colorido" style="text-align: center">
+					<input type="number" id="login" class="input-field" style="width: 20%; height: 20px; margin-top: 70px" placeholder="RA">
+					<input type="text" id="login" class="input-field" style="width: 63%; height: 20px" placeholder="Nome">
+					<input type="number" id="login" class="input-field" style="width: 20%; height: 20px" placeholder="CPF">
+					<input type="number" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="RG">
+					<input type="text" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="Curso">
+					<input type="number" id="login" class="input-field" style="width: 20%; height: 20px" placeholder="Patrimônio">
+					<input type="text" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="Marca">
+					<input type="text" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="Modelo">
+					<input type="text" id="login" class="input-field" style="width: 87%; height: 70px" placeholder="Observação">
+					
+					<div class="botao-emprestimo">
+						<button class="button" style="color: black">Encerrar Empréstimo</button>				
+						<button class="button" style="color: black">Iniciar Empréstimo</button>	
+					</div>		
+				</div>
+				
+			</div>
+		</div>
+        <div id="equipamentos">
+            <div class="painel" style="height: 100%; width: 100%; text-align: left">
+
+				<div id="painel-cadastro" class="painel-colorido" style="text-align: center">
+					<input type="number" id="login" class="input-field" style="width: 20%; height: 20px; margin-top: 70px" placeholder="Patrimônio">
+					<input type="text" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="Marca">
+					<input type="text" id="login" class="input-field" style="width: 30%; height: 20px" placeholder="Modelo">
+					<input type="text" id="login" class="input-field" style="width: 87%; height: 70px" placeholder="Observação">
+					
+					<div class="botao-emprestimo">				
+						<button class="button" style="color: black">Cadastrar</button>	
+					</div>		
+				</div>
+				
+			</div>
+        </div>
+        <div id="listagem">
+            <div class="painel" style="height: 100%; width: 100%; text-align: left">
+				
+				<!-- Painel de Listagem -->
+                    <div id="painel-listagem" class="painel-colorido" style="text-align: center">
+					
+						<input type="text" id="marca" class="input-field" style="width: 87%; height: 20px; margin-top: 70px" placeholder="marca">
+						<input type="text" id="modelo" class="input-field" style="width: 87%; height: 20px" placeholder="modelo">
+						<input type="number" id="patrimonio" class="input-field" style="width: 87%; height: 20px" placeholder="patrimonio">
+						
+						<div class="botao-emprestimo">				
+							<button class="button" style="color: black">Pesquisar</button>	
+						</div>
+                        <hr>
+                        <div class="scrollable-table">
+                            <table id="tabela-lista" class="styled-table" style="width: 87%; height: 20px">
+                                <thead>
+                                    <tr>
+                                        <th>Marca</th>
+                                        <th>Modelo</th>
+                                        <th>Patrimônio</th>
+                                        <th>Status</th>
+                                        <th>Defeito</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- As linhas da tabela serão preenchidas com dados do JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+						<button class="button" style="color: black; width: 150px;" id="btnRegistrarPag">Editar Equipamento</button>
+                    </div>
+					
+			
+			</div>
+        </div>
+        <div id="historico">
+			<div class="painel" style="height: 100%; width: 100%; text-align: left">
+						
+				<!-- Painel de Histórico -->
+                    <div id="painel-historico" class="painel-colorido" style="text-align: center">
+					
+						<input type="text" id="marca" class="input-field" style="width: 87%; height: 20px; margin-top: 70px" placeholder="marca">
+						<input type="text" id="modelo" class="input-field" style="width: 87%; height: 20px" placeholder="modelo">
+						<input type="number" id="patrimonio" class="input-field" style="width: 87%; height: 20px" placeholder="patrimonio">
+						
+						<div class="botao-emprestimo">				
+							<button class="button" style="color: black">Pesquisar</button>	
+						</div>
+                        <hr>
+                        <div class="scrollable-table">
+                            <table id="tabela-lista" class="styled-table" style="width: 87%; height: 20px">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>                                        
+                                        <th>Patrimônio</th>
+										<th>Marca</th>
+                                        <th>RA</th>
+                                        <th>Curso</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- As linhas da tabela serão preenchidas com dados do JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+						<button class="button" style="color: black; width: 150px;" id="btnRegistrarRec">Editar Empréstimo</button>
+                    </div>
+					
+			
+			
+			</div>
+		</div>
+    </div>
+
+    <script>
+		// Função para mostrar o conteúdo de acordo com o link clicado
+		function mostrarConteudo(id) {
+			// Oculta todos os conteúdos
+			document.querySelectorAll(".content > div").forEach(function(div) {
+				div.style.display = "none";
+			});
+
+			// Mostra o conteúdo com o ID correspondente
+			document.getElementById(id).style.display = "block";
+		}
+
+		// Adiciona eventos de clique aos links da barra lateral
+		document.getElementById("link-emprestimo").addEventListener("click", function() {
+			mostrarConteudo("emprestimo");
+		});
+
+		document.getElementById("link-equipamentos").addEventListener("click", function() {
+			mostrarConteudo("equipamentos");
+		});
+
+		document.getElementById("link-listagem").addEventListener("click", function() {
+			mostrarConteudo("listagem");
+		});
+
+		document.getElementById("link-historico").addEventListener("click", function() {
+			mostrarConteudo("historico");
+		});
+
+		// Inicialmente, mostra o conteúdo do "EMPRÉSTIMO"
+		mostrarConteudo("emprestimo");
+		
+	</script>
+	<script src="financeiro.js"></script> <!-- Link para o arquivo JavaScript -->
+</body>
+</html>
