@@ -7,7 +7,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #00FA9A;
+            background-color: #3CB371;
         }
 		
 		.class-logo {
@@ -44,11 +44,11 @@
         }
 
         .sidebar a:hover {
-            background-color: #00FA9A;
+            background-color: #3CB371;
         }
 		
 		.sidebar a.active {
-			background-color: #00FA9A;
+			background-color: #3CB371;
 			color: white;
 		}
 		
@@ -68,7 +68,7 @@
 		}
 		
 		.button {
-			background-color: #00FA9A;
+			background-color: #3CB371;
 			color: white;
 			border: none;
 			border-radius: 4px;
@@ -78,7 +78,7 @@
 		}
 		
 		.button-secondary {
-			background-color: #00FA9A;
+			background-color: #3CB371;
 			color: white;
 			border: none;
 			border-radius: 4px;
@@ -147,7 +147,7 @@
 
 		#painel-emprestimo {
 			position: absolute;
-			background-color: #00FA9A; /* Cor para o botão VENDA */
+			background-color: #3CB371; /* Cor para o botão VENDA */
 			border-radius: 8px;
 			width: 100%;
 			max-width: 80%;
@@ -166,7 +166,7 @@
 
 		#painel-cadastro {
 			position: absolute;
-			background-color: #00FA9A; /* Cor para o botão VENDA */
+			background-color: #3CB371; /* Cor para o botão VENDA */
 			border-radius: 8px;
 			width: 100%;
 			max-width: 80%;
@@ -176,7 +176,7 @@
 
 		#painel-listagem {
 			position: absolute;
-			background-color: #00FA9A; /* Cor para o botão VENDA */
+			background-color: #3CB371; /* Cor para o botão VENDA */
 			border-radius: 8px;
 			width: 100%;
 			max-width: 80%;
@@ -186,7 +186,7 @@
 		
 		#painel-historico {
 			position: absolute;
-			background-color: #00FA9A; /* Cor para o botão VENDA */
+			background-color: #3CB371; /* Cor para o botão VENDA */
 			border-radius: 8px;
 			width: 100%;
 			max-width: 80%;
@@ -281,7 +281,7 @@
 		}
 
 		.scrollable-table::-webkit-scrollbar-thumb {
-			background-color: #00FA9A; /* Cor do indicador da barra de rolagem */
+			background-color: #3CB371; /* Cor do indicador da barra de rolagem */
 			border-radius: 6px; /* Raio das bordas do indicador */
 		}
 
