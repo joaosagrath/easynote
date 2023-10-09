@@ -3,7 +3,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #00FA9A;
+    background-color: #3CB371;
     border: 2px solid #000;
     border-radius: 8px;
     padding: 10px;
@@ -48,7 +48,7 @@
 
 #painel-pagamentos {
 	position: absolute;
-	background-color: #00FA9A; /* Cor para o botão VENDA */
+	background-color: #3CB371; /* Cor para o botão VENDA */
 	border-radius: 8px;
 	width: 100%;
 	max-width: 80%;
@@ -58,7 +58,7 @@
 
 #painel-recebimentos {
 	position: absolute;
-	background-color: #00FA9A; /* Cor para o botão VENDA */
+	background-color: #3CB371; /* Cor para o botão VENDA */
 	border-radius: 8px;
 	width: 100%;
 	max-width: 80%;
@@ -68,7 +68,7 @@
 
 #painel-relatorios {
 	position: absolute;
-	background-color: #00FA9A; /* Cor para o botão VENDA */
+	background-color: #3CB371; /* Cor para o botão VENDA */
 	border-radius: 8px;
 	width: 100%;
 	max-width: 80%;
@@ -106,6 +106,7 @@ select {
 .scrollable-table {
 	max-height: 360px; /* Altura máxima */
 	overflow-y: auto; /* Ativar rolagem vertical */
+	text-align: center;
 }
 
 table {
@@ -145,7 +146,7 @@ tr:nth-child(even) {
 }
 
 .scrollable-table::-webkit-scrollbar-thumb {
-	background-color: #00FA9A; /* Cor do indicador da barra de rolagem */
+	background-color: #3CB371; /* Cor do indicador da barra de rolagem */
 	border-radius: 6px; /* Raio das bordas do indicador */
 }
 
