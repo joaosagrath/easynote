@@ -36,9 +36,16 @@
 					<input type="text" id="observacao" class="input-field" style="width: 87%; height: 70px" placeholder="Observação">
 					
 					<div class="botao-emprestimo">
+
 						<button class="button" style="color: black" onclick="validarCampos('encerrar')">Encerrar Empréstimo</button>
 						<button class="button" style="color: black" onclick="validarCampos('iniciar')">Iniciar Empréstimo</button>
 					</div>
+
+						<button class="button" style="color: black; ">Encerrar Empréstimo</button>				
+						<button class="button" style="color: black; margin-right: 63px;">Iniciar Empréstimo</button>	
+					</div>		
+				</div>
+
 				
 			</div>
 		</div>
@@ -52,7 +59,7 @@
 					<input type="text" id="login" class="input-field" style="width: 87%; height: 70px" placeholder="Observação">
 					
 					<div class="botao-emprestimo">				
-						<button class="button" style="color: black">Cadastrar</button>	
+						<button class="button" style="color: black; margin-right: 63px;">Cadastrar</button>	
 					</div>		
 				</div>
 				
@@ -62,15 +69,13 @@
             <div class="painel" style="height: 100%; width: 100%; text-align: left">
 				
 				<!-- Painel de Listagem -->
-                    <div id="painel-listagem" class="painel-colorido" style="text-align: center">
+                    <div id="painel-listagem" class="painel-colorido" style="text-align: left;">
 					
-						<input type="text" id="marca" class="input-field" style="width: 87%; height: 20px; margin-top: 70px" placeholder="Marca">
-						<input type="text" id="modelo" class="input-field" style="width: 87%; height: 20px" placeholder="Modelo">
-						<input type="number" id="patrimonio" class="input-field" style="width: 87%; height: 20px" placeholder="Patrimonio">
+						<input type="text" id="marca" class="input-field" style="width: 25%; height: 20px; margin-top: 70px; margin-left: 30px;" placeholder="Marca">
+						<input type="text" id="modelo" class="input-field" style="width: 25%; height: 20px" placeholder="Modelo">
+						<input type="number" id="patrimonio" class="input-field" style="width: 25%; height: 20px" placeholder="Patrimonio">
+						<button class="button" style="color: black; width: 10%; margin-left: 25px;">Pesquisar</button>
 						
-						<div class="botao-emprestimo">				
-							<button class="button" style="color: black">Pesquisar</button>	
-						</div>
                         <hr>
                         <div class="scrollable-table" style="text-align: center;">
                             <table id="tabela-lista" class="styled-table" style="width: 95%; height: 20px; margin-left: 30px;">
@@ -88,7 +93,10 @@
                                 </tbody>
                             </table>
                         </div>
-						<button class="button" style="color: black; width: 150px;" id="btnRegistrarPag">Editar Equipamento</button>
+						<div class="botao-emprestimo">				
+							<button class="button" style="color: black; width: 15%; margin-right: 30px;" id="btnEditarEquipamento">Editar Equipamento</button>	
+						</div>
+						
                     </div>
 					
 			
@@ -98,15 +106,12 @@
 			<div class="painel" style="height: 100%; width: 100%; text-align: left">
 						
 				<!-- Painel de Histórico -->
-                    <div id="painel-historico" class="painel-colorido" style="text-align: center">
+                    <div id="painel-historico" class="painel-colorido" style="text-align: left">
 					
-						<input type="text" id="marca" class="input-field" style="width: 87%; height: 20px; margin-top: 70px" placeholder="Marca">
-						<input type="text" id="modelo" class="input-field" style="width: 87%; height: 20px" placeholder="Modelo">
-						<input type="number" id="patrimonio" class="input-field" style="width: 87%; height: 20px" placeholder="Patrimonio">
-						
-						<div class="botao-emprestimo">				
-							<button class="button" style="color: black">Pesquisar</button>	
-						</div>
+						<input type="text" id="marca" class="input-field" style="width: 25%; height: 20px; margin-top: 70px; margin-left: 30px;" placeholder="Marca">
+						<input type="text" id="modelo" class="input-field" style="width: 25%; height: 20px" placeholder="Modelo">
+						<input type="number" id="patrimonio" class="input-field" style="width: 25%; height: 20px" placeholder="Patrimonio">
+						<button class="button" style="color: black; width: 10%; margin-left: 25px;">Pesquisar</button>
                         <hr>
                         <div class="scrollable-table">
                             <table id="tabela-lista" class="styled-table" style="width: 95%; height: 20px; margin-left: 30px;">
@@ -124,7 +129,9 @@
                                 </tbody>
                             </table>
                         </div>
-						<button class="button" style="color: black; width: 150px;" id="btnRegistrarRec">Editar Empréstimo</button>
+						<div class="botao-emprestimo">				
+							<button class="button" style="color: black; width: 15%; margin-right: 30px;" id="btnEditarEquipamento">Editar Equipamento</button>	
+						</div>
                     </div>
 					
 			
