@@ -48,7 +48,7 @@
             background-color: #3CB371;
         }
 		
-		.sidebar a.active {
+		.sidebar a:active {
 			background-color: #3CB371;
 			color: white;
 		}
