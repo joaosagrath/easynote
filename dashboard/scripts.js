@@ -156,3 +156,5 @@ listaPagamentos.forEach(function(pagamento) {
 	const novaLinha = criarLinhaPagamento(pagamento);
 	tbody.appendChild(novaLinha);
 });
+
+
