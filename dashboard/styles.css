@@ -21,7 +21,7 @@
 
         .sidebar {
             width: 200px;
-            background-color: white;
+            background-color: #333;
             position: fixed;
             top: 0;
             left: 0;
@@ -39,7 +39,8 @@
         .sidebar a {
             display: block;
             padding: 10px 20px;
-            color: black;
+            background-color: #333;
+			color: #fff;
             text-decoration: none;
         }
 
