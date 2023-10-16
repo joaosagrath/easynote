@@ -233,3 +233,14 @@ function adicionarLinhaTabelaRec(valores) {
 document.getElementById("btnRegistrarRec").addEventListener("click", abrirPopupRec);
 /* Botão Adicionar Pagamentos */
 document.getElementById("btnRegistrarPag").addEventListener("click", abrirPopupPag);
+
+function validarCampos(acao) {
+    var ra = document.getElementById("ra").value;
+    var patrimonio = document.getElementById("patrimonio").value;
+    
+    if (ra === '' || patrimonio === '') {
+        alert('Por favor, preencha os campos RA e Patrimônio antes de ' + acao + ' o empréstimo.');
+    } else {
+        alert('Função em construção');
+    }
+}
