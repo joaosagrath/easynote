@@ -154,6 +154,6 @@ tr:nth-child(even) {
 	background-color: #ccc; /* Cor de fundo da barra de rolagem */
 }
 
-
-
-
+.botao-emprestimo{
+	text-align: right;
+}
