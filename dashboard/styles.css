@@ -239,12 +239,6 @@
             border-radius: 4px;
         }
 		
-		/* Estilo da div de rolagem */
-        .scrollable-table {
-            max-height: 360px; /* Altura máxima */
-            overflow-y: auto; /* Ativar rolagem vertical */
-        }
-		
 		table {
             border-collapse: collapse;
             width: 98%;
@@ -289,4 +283,5 @@
 		.scrollable-table::-webkit-scrollbar-track {
 			background-color: #ccc; /* Cor de fundo da barra de rolagem */
 		}
-
+		
+		
