@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Executa a query
         if ($conn->query($sql) === TRUE) {
-            echo "Dados inseridos com sucesso.";
+            //echo "Dados inseridos com sucesso.";
 
             // Chama a função para atualizar a tabela equipamentos
             atualizarUsoEquipamentos($conn);
