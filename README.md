@@ -23,7 +23,7 @@ Figura 2. Tela inicial do sistema com o painel de controle
 
 ![unnamed](https://github.com/joaosagrath/easynote.github.io/assets/16491360/6841cdc3-769d-4ebf-8da3-83c6a7c411d9)
 
-ara resolvermos a principal problemática apresentada pelos colaboradores, optamos pela implementação de um processo simplificado, onde apenas o número do registro acadêmico (RA) do aluno e o número do patrimônio do equipamento serão necessários para iniciar e encerrar o empréstimo, conforme ilustrado na Figura 3.
+Para resolvermos a principal problemática apresentada pelos colaboradores, optamos pela implementação de um processo simplificado, onde apenas o número do registro acadêmico (RA) do aluno e o número do patrimônio do equipamento serão necessários para iniciar e encerrar o empréstimo, conforme ilustrado na Figura 3.
 
 Figura 3. Tela principal onde serão realizados os empréstimos
 
