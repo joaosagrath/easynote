@@ -1,0 +1,12 @@
+
+.scrollable-table {
+	max-height: 360px;
+	overflow-y: auto;
+}
+/* Adicione essa classe de destaque */
+.highlighted {
+	background-color: yellow;
+}
+.status-em-uso {
+	color: red; /* Defina a cor desejada para "Em Uso" */
+}

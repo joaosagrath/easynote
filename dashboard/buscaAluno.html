@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consulta RA</title>
+    <style>
+        .result-span {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<input type="number" name="ra" id="ra" class="input-field" style="width: 80px; height: 20px" placeholder="RA" oninput="updateRA()" required min="1">
+
+<span id="idAluno" class="result-span"></span>
+<span id="raOutput" class="result-span"></span>
+<span id="alunoOutput" class="result-span"></span>
+<span id="cpfOutput" class="result-span"></span>
+<span id="cursoOutput" class="result-span"></span>
+
+<script>
+function updateRA() {
+    var raInput = document.getElementById('ra');
+    var raValue = raInput.value;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "buscar_aluno.php?ra=" + raValue, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var responseData = xhr.responseText;
+
+            if (responseData.indexOf("error=") !== -1) {
+                // Exibir mensagem de erro
+                displayError('Erro: ' + responseData.split("=")[1]);
+            } else {
+                // Processar as variáveis
+                var variables = responseData.split("&");
+                for (var i = 0; i < variables.length; i++) {
+                    var pair = variables[i].split("=");
+                    var variableName = pair[0];
+                    var variableValue = pair[1];
+                    displayResult(variableName, variableValue);
+                }
+            }
+        }
+    };
+    xhr.send();
+}
+
+function displayResult(variableName, variableValue) {
+    var spanElement = document.getElementById(variableName);
+    if (spanElement) {
+        // Se o span já existe, atualize seu conteúdo
+        spanElement.innerHTML = variableName + ': ' + variableValue;
+    } else {
+        // Se o span não existe, crie e adicione ao corpo do documento
+        var newSpan = document.createElement("span");
+        newSpan.id = variableName;
+        newSpan.className = "result-span";
+        newSpan.innerHTML = variableName + ': ' + variableValue;
+        document.body.appendChild(newSpan);
+    }
+}
+
+function displayError(errorMsg) {
+    // Exibir mensagem de erro em algum local apropriado, se necessário
+    console.error(errorMsg);
+}
+</script>
+
+</body>
+</html>

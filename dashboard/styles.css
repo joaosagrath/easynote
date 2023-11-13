@@ -1,287 +1,354 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #3CB371;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #3CB371;
-        }
-		
-		.class-logo {
-			background-color: white;
-			border-radius: 8px;
-			padding: 10px;				
-			text-align: center;
-			width: 100px;
-			max-width: 400px;
-		}
+.class-logo {
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: 100px;
+    max-width: 400px;
+}
 
-        .sidebar {
-            width: 200px;
-            background-color: #333;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            padding-top: 20px;
-        }
-		
-		.logo-container {
-			padding-bottom: 20px;
-			display: flex;
-			flex-direction: column; /* Coloca os elementos em coluna */
-			align-items: center; /* Centraliza os elementos verticalmente */
-		}
+.sidebar {
+    width: 200px;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding-top: 20px;
+}
 
-        .sidebar a {
-            display: block;
-            padding: 10px 20px;
-            background-color: #333;
-			color: #fff;
-            text-decoration: none;
-        }
+.logo-container {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    /* Coloca os elementos em coluna */
+    align-items: center;
+    /* Centraliza os elementos verticalmente */
+}
 
-        .sidebar a:hover {
-            background-color: #3CB371;
-        }
-		
-		.sidebar a:active {
-			background-color: #3CB371;
-			color: white;
-		}
-		
-        .content {
-            margin-left: 220px;
-            padding: 20px;
-        }
-		
-		.painel{
-			background-color: white;
-			border-radius: 8px;
-			padding: 5px;
-			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-			text-align: center;
-			width: 100%;
-			max-width: 100%;
-		}
-		
-		.button {
-			background-color: #3CB371;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			padding: 10px 20px;
-			cursor: pointer;
-			width: 99%;
-		}
-		
-		.button-secondary {
-			background-color: #3CB371;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			padding: 10px 20px;
-			cursor: pointer;
-			width: 18%;
-			text-align: left;
-			vertical-align: top; /* Alinha todos os botões pelo topo */
-		}
-			
-		/* Estilo para os botões quando estão ativos (clicados) */
-        .button-secondary:active, .button-secondary.active {
-            height: 50px;
-			padding: 10px 20px;
-			text-align: initial;
-        }
-		
-		#emprestimo {
-			height: 90vh;
-			width: 80vw;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-height: 300px; /* Defina a altura desejada */
-		}
-		
-		#equipamentos {
-			height: 90vh;
-			width: 80vw;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		#listagem {
-			height: 90vh;
-			width: 80vw;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		#historico {
-			height: 90vh;
-			width: 80vw;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		#producao {
-			height: 90vh;
-			width: 80vw;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
+.sidebar a {
+    display: block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    text-decoration: none;
+}
 
-		.painel-colorido {
-			width: 100%;
-			height: 100%; /* Altura do painel colorido */
-			/* display: flex; */
-			justify-content: left;
-			align-items: top;
-		}
+.sidebar a:hover {
+    background-color: #3CB371;
+}
 
-		#painel-emprestimo {
-			position: absolute;
-			background-color: #3CB371; /* Cor para o botão VENDA */
-			border-radius: 8px;
-			width: 100%;
-			max-width: 80%;
-			height: 100%;
-			max-height: 90%;
-		}
-		.botao-emprestimo{
-			width: 100%;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-		}
-		.botao-emprestimo button{
-			margin: 15px;
-		}
+.sidebar a:active {
+    background-color: #3CB371;
+    color: white;
+}
 
-		#painel-cadastro {
-			position: absolute;
-			background-color: #3CB371; /* Cor para o botão VENDA */
-			border-radius: 8px;
-			width: 100%;
-			max-width: 80%;
-			height: 100%;
-			max-height: 90%;
-		}
+.content {
+    margin-left: 220px;
+    padding: 20px;
+}
 
-		#painel-listagem {
-			position: absolute;
-			background-color: #3CB371; /* Cor para o botão VENDA */
-			border-radius: 8px;
-			width: 100%;
-			max-width: 80%;
-			height: 100%;
-			max-height: 90%;
-		}
-		
-		#painel-historico {
-			position: absolute;
-			background-color: #3CB371; /* Cor para o botão VENDA */
-			border-radius: 8px;
-			width: 100%;
-			max-width: 80%;
-			height: 100%;
-			max-height: 90%;
-		}
-		
-		.input-field {			
-			padding: 10px;
-			margin: 10px 0;
-			border: 1px solid #ccc;
-			border-radius: 4px;
-			margin-left: 10px;
-		}
-		
-		.button {
-			background-color: white;
-			color: white;
-			border: none;
-			border-radius: 4px;
-			padding: 10px 20px;
-			cursor: pointer;
-			width: 200px;
-		}
-		
-		 /* Estilos para o rótulo (label) */
-        label {
-			margin-top: 10px;
-            margin-right: 10px;
-        }
+.painel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+}
 
-        /* Estilos para o campo de entrada de data */
-        input[type="date"] {
-			margin-top: 10px;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-		
-		/* Estilos para o container */
-        .dropdown-container {
-            margin: 10px;
-        }
 
-        /* Estilos para o menu dropdown */
-        select {
-            padding: 9px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-		
-		table {
-            border-collapse: collapse;
-            width: 98%;
-        }
+.button-secondary {
+    background-color: #3CB371;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 18%;
+    text-align: left;
+    vertical-align: top;
+    /* Alinha todos os botões pelo topo */
+}
 
-        table, th, td {
-            border: 1px solid #ccc;
-        }
+#dashboard {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
 
-        th, td {
-            padding: 10px;
-            text-align: center;
-        }
+}
 
-        th {
-            background-color: #f2f2f2;
-        }
+#emprestimo {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+}
 
-        .styled-table {
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-left: 10px;
-        }
-		
-		/* Estilo para a barra de rolagem vertical */
-		.scrollable-table::-webkit-scrollbar {
-			width: 12px; /* Largura da barra de rolagem */
-			left: 50px;
-		}
+#equipamentos {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+}
 
-		.scrollable-table::-webkit-scrollbar-thumb {
-			background-color: #3CB371; /* Cor do indicador da barra de rolagem */
-			border-radius: 6px; /* Raio das bordas do indicador */
-		}
+#alunos {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+}
 
-		.scrollable-table::-webkit-scrollbar-track {
-			background-color: #ccc; /* Cor de fundo da barra de rolagem */
-		}
-		
-		
+#listagem {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+}
+
+#historico {
+    height: 90vh;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+}
+
+.painel-colorido {
+    width: 100%;
+    height: 100%;
+    /* Altura do painel colorido */
+    /* display: flex; */
+    justify-content: left;
+    align-items: top;
+}
+
+.painel-colorido-aluno {
+    width: 10%;
+    height: 100%;
+    /* Altura do painel colorido */
+    /* display: flex; */
+    justify-content: left;
+    align-items: top;
+}
+
+#painel-emprestimo {
+    position: absolute;
+    background-color: #3CB371;
+    /* Cor para o botão VENDA */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+.botao-emprestimo {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.botao-emprestimo button {
+    margin: 15px;
+}
+
+#painel-cadastro {
+    position: absolute;
+    background-color: #3CB371;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+#painel-listagem {
+    position: absolute;
+    background-color: #3CB371;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+#painel-historico {
+    position: absolute;
+    background-color: #3CB371;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+#painel-alunos {
+    position: absolute;
+    background-color: #3CB371;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+#painel-historico-aluno {
+    position: absolute;
+    background-color: #3CB371;
+    border-radius: 8px;
+    width: 420px;
+    max-width: 80%;
+    height: 100%;
+    max-height: 90%;
+}
+
+.input-field {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+.button {
+    background-color: white;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 200px;
+}
+
+/* Estilos para o rótulo (label) */
+label {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* Estilos para o campo de entrada de data */
+input[type="date"] {
+    margin-top: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Estilos para o container */
+.dropdown-container {
+    margin: 10px;
+}
+
+/* Estilos para o menu dropdown */
+select {
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 98%;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.styled-table {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
+/* Estilo para a barra de rolagem vertical */
+.scrollable-table::-webkit-scrollbar {
+    width: 12px;
+    /* Largura da barra de rolagem */
+    left: 50px;
+}
+
+.scrollable-table::-webkit-scrollbar-thumb {
+    background-color: #3CB371;
+    /* Cor do indicador da barra de rolagem */
+    border-radius: 6px;
+    /* Raio das bordas do indicador */
+}
+
+.scrollable-table::-webkit-scrollbar-track {
+    background-color: #ccc;
+    /* Cor de fundo da barra de rolagem */
+}
+
+
+.logoFatura-container {
+    display: flex;
+    flex-direction: column;
+    /* Coloca os elementos em coluna */
+    align-items: center;
+    /* Centraliza os elementos verticalmente */
+}
+
+.class-logoFatura {
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 400px;
+}
+
+.container-esquerda {
+    text-align: left;
+    /* Alinhar o conteúdo do endereço à esquerda */
+}
+
+.noPrint {
+  display: block;
+}
+
+/* Estilos para impressão */
+@media print {
+  .noPrint {
+    display: none;
+  }
+  
+  .styled-table{
+	width: 98%;
+	padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-left: 0px;
+  }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dados das Empresas</title>
+</head>
+<body>
+  <table border="1">
+    <tr>
+      <th>Código Único</th>
+      <th>Nome da Empresa</th>
+      <th>Endereço</th>
+      <th>Cidade</th>
+      <th>Telefone</th>
+      <th>Setor</th>
+    </tr>
+
+    <!-- Adicione os dados de cada linha aqui usando JavaScript -->
+  </table>
+
+  <script>
+    // Função para gerar um número aleatório de 4 dígitos
+    function generateRandomCode() {
+      return Math.floor(1000 + Math.random() * 9000);
+    }
+
+    // Função para adicionar uma nova linha à tabela
+    function addRow(codigo, nome, endereco, cidade, telefone, setor) {
+      var table = document.querySelector('table');
+      var newRow = table.insertRow(-1);
+      var cell1 = newRow.insertCell(0);
+      var cell2 = newRow.insertCell(1);
+      var cell3 = newRow.insertCell(2);
+      var cell4 = newRow.insertCell(3);
+      var cell5 = newRow.insertCell(4);
+      var cell6 = newRow.insertCell(5);
+
+      cell1.innerHTML = codigo;
+      cell2.innerHTML = nome;
+      cell3.innerHTML = endereco;
+      cell4.innerHTML = cidade;
+      cell5.innerHTML = telefone;
+      cell6.innerHTML = setor;
+    }
+
+    // Dados das empresas (substitua esses dados pelos seus dados reais)
+    var dadosEmpresas = [
+      [generateRandomCode(), 'Empresa A', 'Rua A', 'Exemploville', '(123) 456-7890', 'Tecnologia'],
+      [generateRandomCode(), 'Empresa B', 'Rua B', 'Cidadeteste', '(987) 654-3210', 'Manufatura'],
+      [generateRandomCode(), 'Empresa C', 'Rua C', 'Cidade C', '(111) 111-1111', 'Serviços'],
+      [generateRandomCode(), 'Empresa D', 'Rua D', 'Cidade D', '(222) 222-2222', 'Alimentação'],
+      [generateRandomCode(), 'Empresa E', 'Rua E', 'Cidade E', '(333) 333-3333', 'Educação'],
+      [generateRandomCode(), 'Empresa F', 'Rua F', 'Cidade F', '(444) 444-4444', 'Saúde'],
+      [generateRandomCode(), 'Empresa G', 'Rua G', 'Cidade G', '(555) 555-5555', 'Tecnologia'],
+      [generateRandomCode(), 'Empresa H', 'Rua H', 'Cidade H', '(666) 666-6666', 'Manufatura'],
+      [generateRandomCode(), 'Empresa I', 'Rua I', 'Cidade I', '(777) 777-7777', 'Educação'],
+      [generateRandomCode(), 'Empresa J', 'Rua J', 'Cidade J', '(888) 888-8888', 'Serviços'],
+    ];
+
+    // Adicione as linhas à tabela com base nos dados das empresas
+    for (var i = 0; i < dadosEmpresas.length; i++) {
+      addRow(...dadosEmpresas[i]);
+    }
+  </script>
+</body>
+</html>

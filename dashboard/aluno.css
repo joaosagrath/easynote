@@ -1,0 +1,138 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-color: #f2f2f2;
+}
+
+.register-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    position: absolute;
+    top: 0;
+}
+
+.class-logo {
+    background-color: black;
+    border-radius: 8px;
+    padding: 10px;
+
+    text-align: center;
+    width: 95%;
+    max-width: 400px;
+}
+
+.input-field {
+    width: 94%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-box {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    background-color: #3CB371;
+    color: white;
+    margin: 10px 0;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.button-spacing {
+    margin-bottom: 10px;
+}
+
+.login-button {
+    width: 100%;
+    display: inline-block;
+}
+
+.error {
+    color: red;
+}
+
+#logo-horizontal {
+    max-width: 90%;
+}
+
+#logo-vertical {
+    max-width: 80%;
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    /* Coloca o modal na parte superior */
+}
+
+/* CSS para centralizar o conteúdo do modal */
+.modal-content {
+    text-align: center;
+    /* Alinha o conteúdo horizontalmente ao centro */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Centraliza verticalmente e horizontalmente */
+    background-color: #fff;
+    padding: 20px;
+}
+
+.cropped-image {
+    max-width: 300px;
+    /* Define a largura máxima para que a imagem se ajuste ao contêiner */
+    max-height: 300px;
+    /* Define a altura máxima desejada */
+    width: auto;
+    /* Para manter a proporção original da imagem */
+    height: auto;
+    /* Para manter a proporção original da imagem */
+}
+
+
+/* Estilo para orientação vertical */
+@media (orientation: portrait) {
+    .register-container {
+        position: absolute;
+        top: 0;
+    }
+
+    .class-logo {
+        width: 90%
+    }
+
+    .input-field {
+        width: 89%
+    }
+
+    .button-secondary {
+        width: 47%
+    }
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualizador de Imagem Base64</title>
+</head>
+<body>
+    <h1>Visualizador de Imagem Base64</h1>
+    <p>Cole a string base64 da imagem abaixo:</p>
+    <textarea id="base64Input" rows="5" cols="50"></textarea>
+    <br>
+    <button onclick="visualizarImagem()">Visualizar Imagem</button>
+    <br>
+    <div id="imagemContainer"></div>
+
+    <script>
+        function visualizarImagem() {
+            const base64String = document.getElementById('base64Input').value;
+            const imagemContainer = document.getElementById('imagemContainer');
+
+            if (base64String) {
+                const mimeType = base64String.split(';')[0].split(':')[1];
+                const imageBlob = base64ToBlob(base64String, mimeType);
+
+                if (imagemContainer.firstChild) {
+                    imagemContainer.removeChild(imagemContainer.firstChild);
+                }
+
+                const imageElement = document.createElement('img');
+                imageElement.src = URL.createObjectURL(imageBlob);
+                imagemContainer.appendChild(imageElement);
+            }
+        }
+
+        function base64ToBlob(base64String, mimeType) {
+            const byteCharacters = atob(base64String);
+            const byteNumbers = new Array(byteCharacters.length);
+
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+
+            const byteArray = new Uint8Array(byteNumbers);
+
+            return new Blob([byteArray], { type: mimeType });
+        }
+    </script>
+</body>
+</html>

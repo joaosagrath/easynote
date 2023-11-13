@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Captura de imagem da webcam com Cropper.js</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+</head>
+<body>
+  <div>
+    <video id="webcam" autoplay playsinline style="width: 100%; max-width: 640px;"></video>
+    <button id="capture">Capturar Imagem</button>
+  </div>
+  <div id="cropper-container" style="display: none;">
+    <img id="capturedImage">
+    <button id="crop">Recortar</button>
+  </div>
+  <canvas id="canvas" style="display: none;"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+  <script>
+    const video = document.getElementById('webcam');
+    const captureButton = document.getElementById('capture');
+    
+	const cropButton = document.getElementById('crop');
+    const canvas = document.getElementById('canvas');
+    const capturedImage = document.getElementById('capturedImage');
+    const cropperContainer = document.getElementById('cropper-container');
+    
+	
+	let cropper; // Variável para manter a instância do Cropper.js
+
+    async function startCamera() {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+    }
+
+    startCamera();
+	
+	captureButton.addEventListener('click', () => {
+      
+	  video.style.display = 'none';
+      cropperContainer.style.display = 'block';
+
+      const context = canvas.getContext('2d');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      capturedImage.src = canvas.toDataURL();
+
+      // Inicializa o Cropper.js após a imagem ser carregada
+      capturedImage.onload = function () {
+        
+		cropper = new Cropper(capturedImage, {
+          aspectRatio: 3 / 4,
+          viewMode: 1,
+        });
+      };
+    });
+
+cropButton.addEventListener('click', () => {
+// Agora você pode usar o Cropper.js para permitir ao usuário recortar a imagem capturada.
+// Certifique-se de que o Cropper.js esteja devidamente configurado.
+	if (cropper) {
+		cropper.getCroppedCanvas().toBlob((blob) => {
+			const raValue = "505319"
+			const formData = new FormData();
+			formData.append('ra', raValue);
+			formData.append('file', blob, 'imagem.jpg');
+
+			fetch('salvar_imagem.php', {
+				method: 'POST',
+				body: formData,
+			})
+				
+				.then(response => response.text())
+				.then(data => {
+					
+					alert(data);
+					// Faça algo com a resposta do servidor, se necessário
+					window.location.href = "alunos.php";
+					
+				})
+				.catch(error => {
+					console.error('Erro:', error);
+				});
+		});
+	}	
+});
+  </script>
+</body>
+</html>

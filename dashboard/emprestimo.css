@@ -1,0 +1,19 @@
+.aluno-foto {
+    background-color: black;
+    border-radius: 8px;
+    padding: 5px;
+    text-align: center;
+    width: 83px;
+    height: 113px; /* Adicione esta linha para definir a altura */
+    max-width: 83px;
+    max-height: 113px; /* Adicione esta linha para definir a altura máxima */
+	background: url(alunos/holder.jpg);
+	background-size: 100% 100%; /* Define o tamanho da imagem de fundo */
+}
+
+/* Estilização para o botão desabilitado */
+#btnIniciar:disabled {
+  background-color: #ccc; /* Cor de fundo quando desabilitado */
+  color: #888; /* Cor do texto quando desabilitado */
+  cursor: not-allowed; /* Altera o cursor para "não permitido" */
+}

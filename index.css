@@ -1,0 +1,91 @@
+            body {
+				font-family: Arial, sans-serif;
+				margin: 0;
+				padding: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 100vh;
+				background-color: #3CB371;
+            }
+            .login-container {
+				background-color: white;
+				border-radius: 8px;
+				padding: 10px;
+				box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+				text-align: center;
+				width: 100%;
+				max-width: 400px;
+			}
+			
+			.error {
+				color: red;
+			}
+			
+			.class-logo {
+				background-color: black;
+				border-radius: 8px;
+				padding: 10px;				
+				text-align: center;
+				width: 95%;
+				max-width: 400px;
+            }
+            .input-field {
+				width: 94%;
+				padding: 10px;
+				margin: 10px 0;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+            }
+            .button {
+				background-color: #3CB371;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				padding: 10px 20px;
+				cursor: pointer;
+				width: 99%;
+            }
+            .button-secondary {
+				background-color: #3CB371;
+				color: white;
+				border: none;
+				border-radius: 4px;
+				padding: 10px 20px;
+				cursor: pointer;
+				width: 49%;
+            }
+            .button-spacing {
+				margin-bottom: 10px;
+            }
+            .login-button {
+				width: 100%;
+				display: inline-block;
+            }
+            #logo-horizontal {
+				max-width: 90%;
+            }
+            #logo-vertical {
+				max-width: 80%;
+            display: none;
+            }
+			
+			/* Estilo para orientação vertical */
+			@media (orientation: portrait) {
+				.login-container {
+					position: absolute;
+					top: 0;
+				}
+				.class-logo {
+					width: 90%
+				}
+				.input-field {
+					width: 89%
+				}
+				.button {
+					width: 95%
+				}
+				.button-secondary {
+					width: 47%
+				}
+			}
