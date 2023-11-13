@@ -1,13 +1,15 @@
 $(document).ready(function() {
+    $("#entrar").hide();
+    
     $("#login").focus(function() {
-        $("#avancar").show();
-		$("#entrar").hide();
         $("#errorMessage").hide(); // Oculta a mensagem de erro ao focar no campo de login
+        $("#avancar").show();
     });
 
     $("#password").focus(function() {
         $("#errorMessage").hide(); // Oculta a mensagem de erro ao focar no campo de login
-        $("#entrar").show();
+       
+
     });
 
     $("#password").keyup(function(event) {
@@ -29,6 +31,7 @@ $(document).ready(function() {
                     $("#login").hide();
                     $("#avancar").hide();
                     $("#password").show();
+                    $("#password").focus();
                     $("#entrar").show();
                 } else {
                     // Substitua o alert por isso
