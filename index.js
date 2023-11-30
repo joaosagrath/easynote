@@ -7,7 +7,7 @@ $(document).ready(function() {
     });
 
     $("#password").focus(function() {
-        $("#errorMessage").hide(); // Oculta a mensagem de erro ao focar no campo de login
+        $("#errorMessage").hide(); // Oculta a mensagem de erro ao focar no campo de password
        
 
     });
@@ -22,7 +22,7 @@ $(document).ready(function() {
         var loginValue = $("#login").val();
         $.ajax({
             type: 'POST',
-            url: 'check_login.php',
+            url: 'CheckLogin.php',
             data: {
                 'login': loginValue
             },
@@ -48,14 +48,18 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'check_password.php',
+            url: 'CheckPassword.php',
             data: {
                 'login': loginValue,
                 'senha': senhaValue
             },
             success: function(response) {
+				
+				//console.log("login: " + loginValue + "\nsenha: " + senhaValue + "\nResposta: " + response);
+				
                 if (response === 'success') {
                     // Senha correta, redirecionar para dashboard/dashboard.php
+					//alert("aguardar");
                     window.location.href = 'dashboard/dashboard.php';
                 } else {
                     $("#entrar").hide();

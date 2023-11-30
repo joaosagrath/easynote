@@ -1,99 +1,47 @@
 <?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 // Inclua o arquivo de configuração
 include('config.php');
+
+// Ajuste o fuso horário
+date_default_timezone_set('America/Sao_Paulo');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['CadastroEquipamentos'])) {
     // Coletar os dados do formulário
     $patrimonio = $_POST['patrimonio'];
     $marca = $_POST['marca'];
     $modelo = $_POST['modelo'];
-	$status = $_POST['status'];
+    $status = $_POST['status'];
+	$datain = $_POST['datain']; // Recebe a data no formato ano-mes-dia do formulário
+    $data = date('d-m-Y', strtotime($datain)); // Converte para o formato dia-mes-ano
     $obs = $_POST['obs'];
-	
-	// Obtenha a hora atual
-    $data = date('d-m-Y'); // Formato: "Ano-Mês-Dia"
-	
-	// Query SQL de inserção
-	$sql = "INSERT INTO equipamentos (patrimonio, marca, modelo, status, observacao, data) VALUES ('$patrimonio', '$marca', '$modelo', '$status', '$obs', '$data')";
+    $uso = 0;
+    
+    // Verificar se o patrimônio já existe na tabela
+    $check_query = "SELECT * FROM equipamentos WHERE patrimonio = '$patrimonio'";
+    $result = $conn->query($check_query);
 
-	// Executa a query
-	if ($conn->query($sql) === TRUE) {
-		echo "Dados inseridos com sucesso.";
-	} else {
-		echo "Erro na inserção de dados: " . $conn->error;
-	}
-
-	// Fecha a conexão
-	$conn->close();
-	
-	// BANCO DE DADOS SOMENYE ATÉ AQUI //
-
-    // Nome do arquivo CSV onde você deseja salvar os dados
-    $csvFile = 'equipamentos.csv';
-
-    // Verifique se o arquivo existe
-    if (file_exists($csvFile)) {
-        // Abra o arquivo CSV em modo de leitura
-        $file = fopen($csvFile, 'r');
-        
-        // Inicialize uma variável para verificar se o patrimônio já existe
-        $patrimonioExiste = false;
-
-        // Percorra o arquivo CSV para verificar se o patrimônio já existe
-        while (($row = fgetcsv($file)) !== false) {
-            if ($row[0] === $patrimonio) {
-                $patrimonioExiste = true;
-                break;
-            }
-        }
-
-        // Feche o arquivo CSV
-        fclose($file);
-
-        if ($patrimonioExiste) {
-			
-			header('Location: equipamentos.php?error=' . $patrimonio);
-			exit();
-        
-		} else {
-            // Construa a linha de dados no formato CSV
-            $data = array($patrimonio, $marca, $modelo, $obs);
-
-            // Abra o arquivo CSV em modo de escrita
-            $file = fopen($csvFile, 'a');
-
-            // Gere uma linha CSV usando a função implode
-            $csv_line = implode(',', $data) . "\n";
-
-            // Escreve a linha CSV no arquivo.
-            fwrite($file, $csv_line);
-
-            // Feche o arquivo CSV
-            fclose($file);
-			
-            header('Location: equipamentos.php');
-            exit();
-        }
+    if ($result->num_rows > 0) {
+        // Se o patrimônio existir, exibir um alerta
+        echo "<script>alert('O patrimônio já está cadastrado.'); window.location.href = 'equipamentos.php';</script>";
     } else {
-        // Se o arquivo não existe, simplesmente adicione os dados
-        $data = array($patrimonio, $marca, $modelo, $obs);
-
-        // Abra o arquivo CSV em modo de escrita
-        $file = fopen($csvFile, 'a');
-
-        // Gere uma linha CSV usando a função implode
-        $csv_line = implode(',', $data) . "\n";
-
-        // Escreve a linha CSV no arquivo.
-        fwrite($file, $csv_line);
-
-        // Feche o arquivo CSV
-        fclose($file);
-
-        header('Location: equipamentos.php');
-        exit();
+        // Caso contrário, proceder com a inserção
+        $sql = "INSERT INTO equipamentos (patrimonio, marca, modelo, status, observacao, data, uso) 
+			VALUES ('$patrimonio', '$marca', '$modelo', '$status', '$obs', '$data', '$uso')";
+    
+        // Executar a query
+        if ($conn->query($sql) === TRUE) {
+            echo "<script>alert('Patrimônio $patrimonio cadastrado com sucesso.'); window.location.href = 'equipamentos.php';</script>";
+        } else {
+            echo "Erro na inserção de dados: " . $conn->error;
+        }
     }
-} else {
-    $alertMessage = "Nenhum dado foi submetido.";
+
+    // Fechar a conexão
+    $conn->close();
 }
 ?>

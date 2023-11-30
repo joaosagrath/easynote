@@ -1,4 +1,9 @@
 <?php 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
     // Inclua o arquivo de configuração
     include('config.php');
 
@@ -9,7 +14,7 @@
 	if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Recupere os dados do formulário
 		$ra = $_POST["ra"];
-		$fullname = $_POST["fullname"];
+		$fullname = mysqli_real_escape_string($conn, $_POST["fullname"]); // Escapar o caractere '
 		$cpf = $_POST["cpf"];
 		$curso = $_POST["curso"];
 		$email = $_POST["email"];
@@ -63,16 +68,23 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+        <link rel="manifest" href="../site.webmanifest.json">
+        <link rel="mask-icon" href="../icons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.min.css">
         <link rel="stylesheet" type="text/css" href="aluno.css">
-        <title>Ativação de Cadastro de Aluno</title>
+        <title>EasyNote - Ativação de Cadastro de Aluno</title>
     </head>
     <body>
         <div class="register-container">
-            <img src="../resources/logo-horizontal.gif" alt="Descrição da Imagem" class="class-logo">
+            <img src="../resources/logo-horizontal.png" alt="Descrição da Imagem" class="class-logo">
             <form name="registrationForm" method="POST" action="<?php echo $_SERVER['PHP_SELF'] . "?ra=" . $ra; ?>">
                 <input type="text" id="ra" name="ra" placeholder="Digite seu RA (Registro de Aluno)" value="<?php echo $ra; ?>" class="input-field" readonly>
                 <input type="text" id="fullname" name="fullname" value="<?php echo $fullname; ?>" class="input-field" readonly>
@@ -103,5 +115,6 @@
             </div>
         </div>
         <script src="aluno.js"></script>
+        <script src="utils.js"></script>
     </body>
 </html>

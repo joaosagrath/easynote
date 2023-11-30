@@ -1,7 +1,7 @@
 // Função para Criar o Barra Horizontal Semanal
-function criarGraficoHorizontalBar(EquipHoje, EquipSemanaPassada, EquipSemanaRetrasada) {
+function criarGraficoHorizontalWeekBar(EquipHoje, EquipSemanaPassada, EquipSemanaRetrasada) {
     // Obtém uma referência ao elemento canvas para o chart de equipamentos
-    var EquipChart = document.getElementById('horizontalBarEquipChart').getContext('2d');
+    
     var WeekEquipChart = document.getElementById('horizontalBarWeekEquipChart').getContext('2d');
 
     // Obtém os rótulos dos elementos <span>
@@ -11,33 +11,6 @@ function criarGraficoHorizontalBar(EquipHoje, EquipSemanaPassada, EquipSemanaRet
     var span_equipTotal = document.getElementById('span_equipTotal').textContent;
     var span_equipUso = document.getElementById('span_equipUso').textContent;
     var span_alunosAti = document.getElementById('span_alunosAti').textContent;
-
-    // Dados do gráfico de pizza
-    var dataEquipChart = {
-        labels: [equipTotal, equipUso, alunosAti], 
-        datasets: [{
-            data: [span_equipTotal, span_equipUso, span_alunosAti],
-            backgroundColor: ['blue', 'yellow', 'green']
-        }]
-    };
-
-    // Cria o gráfico de pizza
-    var equipChart = new Chart(EquipChart, {
-		type: 'bar', // Defina o tipo como 'bar' para barras horizontais
-		data: dataEquipChart,
-		options: {
-			indexAxis: 'y', // Defina o eixo Y como o eixo de categoria
-			plugins: {
-				legend: {
-					display: false
-				},
-				title: {
-					display: true,
-					text: 'Equipamentos e Alunos' // Aqui você define o título que deseja exibir
-				}
-			}
-		}
-	});
 	
 	// Dados do gráfico de pizza
     var dataWeekEquipChart = {
@@ -109,6 +82,38 @@ function criarGraficoBarras(nomeTop, valoresTop10) {
     });
 }
 
+function criarGraficoHorizontalSalaBar(nomeDezSalas, totalDezSalas) {
+	
+	var EquipChart = document.getElementById('horizontalBarSalaChart').getContext('2d');
+	
+    var dataEquipChart = {
+        labels: nomeDezSalas, 
+        datasets: [{
+            data: totalDezSalas,
+            backgroundColor: ['blue', 'yellow', 'green', 'red', 'purple', 'orange', 'pink', 'teal', 'cyan', 'magenta']
+        }]
+    };
+
+    // Cria o gráfico de pizza
+    var equipChart = new Chart(EquipChart, {
+		type: 'bar', // Defina o tipo como 'bar' para barras horizontais
+		data: dataEquipChart,
+		options: {
+			indexAxis: 'y', // Defina o eixo Y como o eixo de categoria
+			plugins: {
+				legend: {
+					display: false
+				},
+				title: {
+					display: true,
+					text: 'Retirada de Sala dos ultimos 7 dias' // Aqui você define o título que deseja exibir
+				}
+			}
+		}
+	});
+
+}
+
 // Array com os 10 patrimônios mais utilizados
 var nomeTop = dezMaisUtilizados.map(function(item) {
     return item.patrimonio;
@@ -117,6 +122,14 @@ var nomeTop = dezMaisUtilizados.map(function(item) {
 // Array com as quantidades correspondentes dos 10 mais utilizados
 var valoresTop10 = dezMaisUtilizados.map(function(item) {
     return item.total_utilizacoes;
+});
+
+var nomeDezSalas = dezSalas.map(function(item) {
+	return item.sala;
+});
+
+var totalDezSalas = dezSalas.map(function(item) {
+	return item.salaTotal;
 });
 
 const totalEquipamentosBD = document.getElementById('span_equipTotal');
@@ -134,6 +147,7 @@ const divCursoMaisAtivo = document.getElementById('span_cursoMaisAtivo');
 divAlunoMaisAtivo.innerHTML = '<b>' + alunoMaisAtivo.ra + ': ' + alunoMaisAtivo.aluno + '</b>';
 divCursoMaisAtivo.innerHTML = '<b>' + cursoMaisAtivo.curso + '</b>';
 
-criarGraficoHorizontalBar(equipamentosHoje, equipamentos7Dias, equipamentos14Dias);
+criarGraficoHorizontalWeekBar(equipamentosHoje, equipamentos7Dias, equipamentos14Dias);
+criarGraficoHorizontalSalaBar(nomeDezSalas, totalDezSalas);
 
 encontrarEquipamentoMaiorUtilizacao();

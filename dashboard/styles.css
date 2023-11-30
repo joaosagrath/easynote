@@ -10,8 +10,8 @@ body {
 
 .class-logo {
     background-color: white;
-    border-radius: 8px;
-    padding: 10px;
+    /* border-radius: 8px; 
+    padding: 10px; */
     text-align: center;
     width: 100px;
     max-width: 400px;
@@ -46,6 +46,13 @@ body {
 
 .sidebar a:hover {
     background-color: #3CB371;
+	width: 80%;
+}
+
+.sidebar a:hover .class-logo {
+    background-color: #3CB371;
+    transform: translateX(+30%);
+    /*transition: transform 0.3s ease; /* Adiciona uma transição suave para a animação */
 }
 
 .sidebar a:active {
@@ -68,19 +75,6 @@ body {
     max-width: 100%;
 }
 
-
-.button-secondary {
-    background-color: #3CB371;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 20px;
-    cursor: pointer;
-    width: 18%;
-    text-align: left;
-    vertical-align: top;
-    /* Alinha todos os botões pelo topo */
-}
 
 #dashboard {
     height: 90vh;
@@ -148,7 +142,7 @@ body {
     position: absolute;
     background-color: #3CB371;
     /* Cor para o botão VENDA */
-    border-radius: 8px;
+    border-radius: 4px;
     width: 100%;
     max-width: 80%;
     height: 100%;
@@ -169,7 +163,7 @@ body {
 #painel-cadastro {
     position: absolute;
     background-color: #3CB371;
-    border-radius: 8px;
+    border-radius: 4px;
     width: 100%;
     max-width: 80%;
     height: 100%;
@@ -179,17 +173,7 @@ body {
 #painel-listagem {
     position: absolute;
     background-color: #3CB371;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 80%;
-    height: 100%;
-    max-height: 90%;
-}
-
-#painel-historico {
-    position: absolute;
-    background-color: #3CB371;
-    border-radius: 8px;
+    border-radius: 4px;
     width: 100%;
     max-width: 80%;
     height: 100%;
@@ -199,7 +183,7 @@ body {
 #painel-alunos {
     position: absolute;
     background-color: #3CB371;
-    border-radius: 8px;
+    border-radius: 4px;
     width: 100%;
     max-width: 80%;
     height: 100%;
@@ -209,7 +193,7 @@ body {
 #painel-historico-aluno {
     position: absolute;
     background-color: #3CB371;
-    border-radius: 8px;
+    border-radius: 4px;
     width: 420px;
     max-width: 80%;
     height: 100%;

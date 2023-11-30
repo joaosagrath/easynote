@@ -1,35 +1,61 @@
+<?php
+
+// Inclua o arquivo de configuração
+include('config.php');
+
+include_once('session/sessao.php')
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta charset="UTF-8">
+        <link rel="apple-touch-icon" sizes="180x180" href="../icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../icons/favicon-16x16.png">
+        <link rel="manifest" href="../site.webmanifest.json">
+        <link rel="mask-icon" href="../icons/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>EasyNote</title>
         <link rel="stylesheet" type="text/css" href="styles.css">
         <link rel="stylesheet" type="text/css" href="dashboard.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <!-- <script src="chart.js"></script> -->
-        <!-- Link para o arquivo CSS -->
     </head>
     <body>
         <div class="sidebar">
             <div class="logo-container">
                 <a href="dashboard.php">
-                <img src="../resources/icon.gif" alt="Descrição da Imagem" class="class-logo">
+                <img src="../resources/icon.png" alt="Descrição da Imagem" class="class-logo">
                 </a>
             </div>
             <a href="emprestimo.php" id="link-emprestimo">EMPRÉSTIMO</a>
+			<a href="relatorios.php" id="link-alunos">RELATÓRIOS</a>
             <a href="equipamentos.php" id="link-equipamentos">EQUIPAMENTOS</a>
-            <!-- <a href="listagem.php" id="link-listagem">LISTAGEM</a> -->
-            <a href="alunos.php" id="link-alunos">ALUNOS ATIVOS</a>
-            <a href="relatorios.php" id="link-alunos">RELATÓRIOS</a>
+			<a href="material.php" id="link-alunos">MATERIAL DE SALA</a>
+			<a href="alunos.php" id="link-alunos">ALUNOS ATIVOS</a>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<span id="operador" style="width: 195px; height: 20px; margin-left: 10px; padding: 10px; display: block; color: white"><?PHP echo $_SESSION['operador']; ?></span>
+			<a href="session/logout.php" id="link-logout" style="font-size: 13px;">SAIR</a>
         </div>
         <div class="content">
         <div id="dashboard">
         <div class="painel" style="height: 100%; width: 100%; text-align: center">
             <div id="painel-emprestimo" class="painel-colorido" style="text-align: center">
-                <!-- <img src="../resources/logo-horizontal.gif" alt="Descrição da Imagem" style="width: 400px;"class="class-logo"> -->
                 <div class="container" style="display: flex; margin-top: 20px; margin-left: 40px">
-                    <div class="input-field" style="text-align: left; width: 300px; color: white">
+                    
+					<div class="input-field" style="text-align: left; width: 300px; height: 150px; color: white">
                         <div style="text-align: left; display: inline-block; ">
                             <span id="equipTotal" style="width: 195px; height: 20px; padding: 8px; display: block;">Total de Equipamentos:</span>
                             <hr>
@@ -45,48 +71,55 @@
                             <span id="span_alunosAti" style="width: 50px; height: 20px; padding: 8px; display: block;"><b></b></span>
                         </div>
                     </div>
-                    <div class="input-field" style="text-align: left; width: 630px; color: white">
-                        <div style="text-align: left; display: inline-block; ">
-                            <span id="" style="width: 225px; height: 20px; padding: 8px; display: block;">Equipamento mais Usado:</span>
+					
+                    <div class="input-field" style="text-align: left; width: 298px; height: 150px; color: white">
+                        
+						<div style="display: inline-block; ">
+							<span id="" style="margin-left: 8px; width: 225px; height: 10px; display: block; font-size: 12px;">Equipamento mais Usado:</span>
+                            <span id="span_equipMaisUso" style="margin-left: 8px; margin-top: 8px ; width: 290px; height: 20px; display: block;"><b></b></span>
                             <hr>
-                            <span id="" style="width: 225px; height: 20px; padding: 8px; display: block;">Aluno mais Ativo:</span>
+							<span id="" style="margin-left: 8px; width: 225px; height: 10px; display: block; font-size: 12px;">Aluno mais Ativo:</span>
+                            <span id="span_alunoMaisAtivo" style="margin-left: 8px; margin-top: 8px ; width: 290px; height: 20px; display: block;"><b> </b></span>
                             <hr>
-                            <span id="" style="width: 225px; height: 20px; padding: 8px; display: block;">Curso mais Ativo:</span>
-                        </div>
-                        <div style="display: inline-block; ">
-                            <span id="span_equipMaisUso" style="width: 265px; height: 20px; padding: 8px; display: block;"><b></b></span>
-                            <hr>
-                            <span id="span_alunoMaisAtivo" style="width: 265px; height: 20px; padding: 8px; display: block;"><b> </b></span>
-                            <hr>
-                            <span id="span_cursoMaisAtivo" style="width: 365px; height: 20px; padding: 8px; display: block;"><b> </b></span>
+							<span id="" style="margin-left: 8px; width: 225px; height: 10px; display: block; font-size: 12px;">Curso mais Ativo:</span>
+                            <span id="span_cursoMaisAtivo" style="margin-left: 8px; margin-top: 8px ; width: 290px; height: 20px; display: block;"><b> </b></span>
                         </div>
                     </div>
+					
+					<div class="input-field" style="text-align: left; width: 300px; height: 320px">
+						<canvas id="horizontalBarSalaChart" width="300" height="320">  </canvas>
+					</div>
                 </div>
+				
                 <div class="container" style="display: flex; margin-left: 40px">
-                    <div class="input-field" style="text-align: left; width: 630px">
+                    <div class="input-field" style="text-align: left; width: 630px; margin-top: -170px">
                         <canvas id="barChart"></canvas>
                     </div>
-                    <div>
-                        <div class="input-field" style="text-align: left; width: 300px; height: 140px">
-                            <canvas id="horizontalBarEquipChart">  </canvas>
-                        </div>
-                        <div class="input-field" style="text-align: left; width: 300px; height: 140px">
+                    
+                        
+                        <div class="input-field" style="text-align: left; width: 300px; margin-top: -00px">
                             <canvas id="horizontalBarWeekEquipChart"></canvas>
                         </div>
-                        <div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
         <?php
-            // Inclua o arquivo de configuração
-            include('config.php');
-            
             // Consulta SQL para buscar o número de patrimônio mais utilizado e os 10 números de patrimônio mais utilizados na tabela equipamentos
-            $queryMaisUtilizado = "SELECT patrimonio, marca, modelo, SUM(uso) AS total_utilizacoes FROM equipamentos GROUP BY patrimonio, marca, modelo ORDER BY total_utilizacoes DESC LIMIT 1";
-            $queryDezMaisUtilizados = "SELECT patrimonio, marca, modelo, SUM(uso) AS total_utilizacoes FROM equipamentos GROUP BY patrimonio, marca, modelo ORDER BY total_utilizacoes DESC LIMIT 10";
-            
+            $queryMaisUtilizado = "SELECT patrimonio, marca, modelo, 
+				SUM(uso) AS total_utilizacoes 
+				FROM equipamentos 
+				GROUP BY patrimonio, marca, modelo 
+				ORDER BY total_utilizacoes 
+				DESC LIMIT 1";
+				
+            $queryDezMaisUtilizados = "SELECT patrimonio, marca, modelo, 
+				SUM(uso) AS total_utilizacoes 
+				FROM equipamentos 
+				GROUP BY patrimonio, marca, modelo 
+				ORDER BY total_utilizacoes 
+				DESC LIMIT 10";
+
             $queryAlunoMaisAtivo = "SELECT ra, aluno, COUNT(ra) AS total_emprestimos FROM emprestimos GROUP BY ra, aluno ORDER BY total_emprestimos DESC LIMIT 1";
             $queryCursoMaisAtivo = "SELECT curso, COUNT(curso) AS total_emprestimos FROM emprestimos GROUP BY curso ORDER BY total_emprestimos DESC LIMIT 1";
             $queryEquipamentosEmAndamento = "SELECT COUNT(patrimonio) AS total_em_andamento FROM emprestimos WHERE status = 'em andamento'";
@@ -137,6 +170,30 @@
                     );
                 }
             }
+			
+			$queryDezSalas = "SELECT sala, COUNT(sala) AS total_sala 
+				FROM retirada 
+				WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE() 
+				GROUP BY sala 
+				ORDER BY total_sala DESC 
+				LIMIT 10";
+
+			// Executa a consulta SQL para os 10 números de patrimônio mais utilizados
+            $resultDezSalas = $conn->query($queryDezSalas);
+            
+            if ($resultDezSalas) {
+				while ($row = $resultDezSalas->fetch_assoc()) {
+					$dezSalas[] = array(
+						'sala' => $row['sala'],
+						'salaTotal' => $row['total_sala']
+					);
+				}
+			}
+			
+			
+            
+			
+
             
             // Executa a consulta SQL para o aluno mais ativo
             $resultAlunoMaisAtivo = $conn->query($queryAlunoMaisAtivo);
@@ -230,7 +287,12 @@
             foreach ($dezMaisUtilizados as $index => $patrimonio) {
                 echo "Número de patrimônio: {$patrimonio['patrimonio']}, Marca: {$patrimonio['marca']}, Modelo: {$patrimonio['modelo']}, Total de utilizações: {$patrimonio['total_utilizacoes']}<br><br>";
             }
-            
+			
+			echo "As 10 Salas:<br>";
+			
+			foreach ($dezSalas as $index => $sala) {
+                echo "Número da Sala: {$sala['sala']}, total: {$sala['salaTotal']}<br><br>";
+            }
             echo "Aluno mais ativo: RA {$alunoMaisAtivo['ra']}, Aluno: {$alunoMaisAtivo['aluno']}, Total de empréstimos: {$alunoMaisAtivo['total_emprestimos']}<br>";
             
             echo "Curso mais ativo: Curso: {$cursoMaisAtivo['curso']}, Total de empréstimos: {$cursoMaisAtivo['total_emprestimos']}<br>";
@@ -252,6 +314,7 @@
             echo '<script>';
             echo 'var patrimonioMaisUtilizado = ' . json_encode($patrimonioMaisUtilizado) . ';';
             echo 'var dezMaisUtilizados = ' . json_encode($dezMaisUtilizados) . ';';
+            echo 'var dezSalas = ' . json_encode($dezSalas) . ';';
             echo 'var alunoMaisAtivo = ' . json_encode($alunoMaisAtivo) . ';';
             echo 'var cursoMaisAtivo = ' . json_encode($cursoMaisAtivo) . ';';
             echo 'var equipamentosEmUso = ' . json_encode($equipamentosEmUso) . ';';

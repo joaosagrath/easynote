@@ -81,7 +81,7 @@ function editarLinhaAluno() {
                     formData.append('ra', raValue);
                     formData.append('file', blob, 'imagem.jpg');
 
-                    fetch('salvar_imagem.php', {
+                    fetch('SalvarImagem.php', {
                             method: 'POST',
                             body: formData,
                         })
@@ -149,9 +149,114 @@ function abrirModalAlunos() {
 
 // Função para fechar o modal Pagamentos
 function fecharModalAlunos() {
-	
-	
     var modal = document.getElementById('myModalAluno');
-	
     modal.style.display = 'none';
 }
+
+// Função para pesquisa em relatórios
+document.addEventListener("DOMContentLoaded", function() {
+    // Pega os elementos dos campos de filtro
+    var inputRA = document.getElementById('RA');
+    var inputAluno = document.getElementById('Aluno');
+    var inputCPF = document.getElementById('CPF');
+    var selectCurso = document.getElementById('Curso');
+
+    var tabela = document.getElementById('tabela-alunos');
+    var linhas = tabela.getElementsByTagName('tr');
+
+    // Função para limpar os campos de pesquisa e reexibir todas as linhas da tabela
+   function resetPesquisa() {
+        inputRA.value = '';
+        inputAluno.value = '';
+        inputCPF.value = '';
+        selectCurso.value = 'Todos';
+
+        // Exibir todas as linhas da tabela
+        for (var i = 1; i < linhas.length; i++) {
+            var linha = linhas[i];
+            linha.style.display = '';
+        }
+    }
+
+     // Adicione um ouvinte de evento ao botão de pesquisa
+     document.getElementById("botao-pesquisar").addEventListener("click", function() {
+        var filtroRA = inputRA.value;
+        var filtroAluno = inputAluno.value.toLowerCase();
+        var filtroCPF = inputCPF.value;
+        var filtroCurso = selectCurso.value.toLowerCase();
+
+
+         // Loop através das linhas da tabela para aplicar o filtro
+         for (var i = 1; i < linhas.length; i++) {
+            var linha = linhas[i];
+            var celulas = linha.getElementsByTagName('td');
+	
+			var RA = celulas[0].innerText;
+			var Aluno = celulas[1].innerText.toLowerCase();
+            var CPF = celulas[2].innerText;
+            var Curso = celulas[3].innerText.toLowerCase();
+    
+			//alert("filtroCurso: " + filtroCurso + "\nCurso: " + Curso);
+			
+            if (
+                (filtroRA === '' || RA.includes(filtroRA)) &&
+                (filtroAluno === '' || Aluno.includes(filtroAluno)) &&
+                (filtroCPF === '' || CPF.includes(filtroCPF)) &&
+                (filtroCurso === 'todos' || Curso.includes(filtroCurso))
+            ) {
+				
+                linha.style.display = ''; // Mostra a linha se atender aos critérios de filtro
+            
+			} else {
+                linha.style.display = 'none'; // Oculta a linha se não atender aos critérios de filtro
+            }
+            
+        }
+    });
+
+    // Adicione um ouvinte de evento ao botão de reset
+   document.getElementById("botao-reset").addEventListener("click", function() {
+        resetPesquisa();
+    });
+});
+
+function preencherSelectComCursos() {
+    // Obtém a tabela e suas linhas
+    var table = document.getElementById("tabela-alunos");
+    var rows = table.getElementsByTagName("tr");
+    
+    var cursosSet = new Set(); // Usando um Set para garantir valores únicos
+    
+    // Itera pelas linhas, começa em 1 para pular o cabeçalho
+    for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        if (cells.length >= 4) { // Verifica se há dados suficientes na linha
+            var curso = cells[3].innerText.trim(); // A coluna do curso é a quarta (índice 3)
+            cursosSet.add(curso);
+        }
+    }
+    
+    // Converte o Set para um array e ordena os cursos em ordem alfabética
+    var cursosArray = Array.from(cursosSet).sort();
+
+    // Preenche o select com os cursos ordenados
+    var select = document.getElementById("Curso");
+    select.innerHTML = ""; // Limpa as opções existentes
+
+    // Adiciona a opção "Todos"
+    var optionTodos = document.createElement("option");
+    optionTodos.value = "Todos";
+    optionTodos.text = "Todos";
+    select.appendChild(optionTodos);
+
+    // Adiciona as opções dos cursos
+    for (var j = 0; j < cursosArray.length; j++) {
+        var option = document.createElement("option");
+        option.value = cursosArray[j];
+        option.text = cursosArray[j];
+        select.appendChild(option);
+    }
+}
+
+// Chama a função para preencher o select ao carregar a página
+preencherSelectComCursos();

@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Executa a consulta preparada
         if ($stmt->execute()) {
-            echo "Dados atualizados com sucesso.<br><br>";
+            // echo "Dados atualizados com sucesso.<br><br>";
             // Redirecione o usuário de volta para a página de alunos
             header("Location: alunos.php");
         } else {

@@ -17,19 +17,19 @@
     </head>
     <body>
         <div class="login-container">
-			<img src="resources/logo-horizontal.gif" alt="Descrição da Imagem" class="class-logo">
+				<img src="resources/logo-horizontal.png" alt="Descrição da Imagem" class="class-logo">
 
-			<input style="display: block" type="text" class="input-field" id="login" placeholder="Login">
-			<button class="button button-spacing" id="avancar">AVANÇAR</button>
+				<input style="display: block" type="text" class="input-field" id="login" placeholder="Login">
+				<button class="button button-spacing" id="avancar">AVANÇAR</button>
 
-			<input style="display: none" type="password" class="input-field" id="password" placeholder="Senha">
-			<button style="display: none" class="button button-spacing" id="entrar">ENTRAR</button>
+				<input style="display: none" type="password" class="input-field" id="password" placeholder="Senha">
+				<button class="button button-spacing" style="display: none" id="entrar">ENTRAR</button>
 
-			<p style="display: none" id="errorMessage" class="error"></p>
-			
-			<button class="button-secondary">Esqueci a Senha</button>
-            <button class="button-secondary" onclick="location.href='dashboard/ra.php'">Sou Aluno</button>
-        </div>
+				<p style="display: none" id="errorMessage" class="error"></p>
+				
+				<button class="button-secondary">Esqueci a Senha</button>
+				<button class="button-secondary" onclick="location.href='dashboard/ra.php'">Sou Aluno</button>
+		</div>
         
     </body>
 </html>

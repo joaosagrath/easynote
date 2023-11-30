@@ -45,12 +45,10 @@ $(document).ready(function(){
 
 		$.ajax({
 			type: 'POST',
-			url: 'check_login.php',
+			url: 'CheckLogin.php',
 			data: {'ra': loginValue},
 			
 			success: function(response){
-				
-				alert(response);
 				
 				if(response === 'ativado'){
 					$("#ra").hide();
@@ -82,7 +80,7 @@ $(document).ready(function(){
         var senhaValue = $("#password").val();
         $.ajax({
             type: 'POST',
-            url: 'check_password.php',
+            url: 'CheckPassword.php',
             data: {'ra': raValue, 'senha' : senhaValue},
             success: function(response){
 				if(response.trim() == 'success'){
@@ -100,7 +98,7 @@ $(document).ready(function(){
         var cpfValue = $("#cpf").val();
         $.ajax({
             type: 'POST',
-            url: 'check_cpf.php',
+            url: 'CheckCPF.php',
             data: {'ra': raValue, 'cpf': cpfValue},
             success: function(response){
 				
@@ -119,13 +117,15 @@ $(document).ready(function(){
         var cpfValue = $("#cpf").val();
         $.ajax({
             type: 'POST',
-            url: 'check_cpf.php',
+            url: 'CheckCPF.php',
             data: {'ra': raValue, 'cpf': cpfValue},
             success: function(response){
 				
+				//alert(cpfValue);
+				
                 if(response === 'success'){
                     // CPF correta, redirecionar para dashboard/dashboard.php
-                    window.location.href = 'redefinirSenha.php?ra=' + loginValue;
+                    window.location.href = 'RedefinirSenha.php?ra=' + loginValue;
                 } else {
                     $("#errorMessage").text('CPF incorreto. Tente novamente.').show();
                 }

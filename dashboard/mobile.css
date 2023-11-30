@@ -36,6 +36,18 @@ body {
 	display: none;
 }
 
+.painel-desktop-carteira{
+	background-color: #3CB371;
+	border-radius: 8px;
+    padding: 5px;
+	display: block;
+	width: 315px;
+	
+}
+
+.painel-mobile-carteira{
+	display: none;
+}
 .class-logo {
     background-color: black;
     border-radius: 8px;
@@ -84,7 +96,15 @@ body {
 }
 
 .input-field {
-    width: 94%;
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.input-fieldSenha {
+    width: 41%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -122,7 +142,6 @@ body {
 	text-align: center;
 }
 
-
 .button-spacing {
     margin-bottom: 10px;
 }
@@ -139,7 +158,16 @@ body {
 
 /* Estilo para o popup */
 .popup {
-	width: 280px;
+	display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    //*z-index: 999; 
+	
+	/*width: 350px;
     display: none;
     position: fixed;
     top: 50%;
@@ -150,7 +178,27 @@ body {
     background: white;
     border: 1px solid #ccc;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
+    /* z-index: 9999; */
+}
+
+/* CSS para centralizar o conteúdo do modal */
+.popup-content {
+	text-align: center;
+	width: 283px;
+	
+	/* Alinha o conteúdo horizontalmente ao centro */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	/* Centraliza verticalmente e horizontalmente */
+	background: white;
+	padding: 20px;
+}
+
+.scrollable-table {
+	max-height: 335px;
+	overflow-y: auto;
 }
 
 .modal {
@@ -167,15 +215,32 @@ body {
 
 /* CSS para centralizar o conteúdo do modal */
 .modal-content {
-    text-align: center;
-    /* Alinha o conteúdo horizontalmente ao centro */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Centraliza verticalmente e horizontalmente */
-    background-color: #fff;
-    padding: 20px;
+	width: 350px;
+	height: 580px;
+	border-radius: 8px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+}
+
+.modal-content-desktop {
+	width: 350px;
+	height: 580px;
+	border-radius: 8px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+}
+
+.modal-content-crop {
+    width: 345px;
+    height: 490px;
 }
 
 .button-modal {
@@ -183,59 +248,109 @@ body {
     color: white;
     border: none;
     border-radius: 4px;
+	
     padding: 10px 20px;
     cursor: pointer;
-    width: 50%;
+    width: 45%;
     text-align: center;
     vertical-align: top;
 }
 
-.cropped-image {
-    max-width: 300px;
-    /* Define a largura máxima para que a imagem se ajuste ao contêiner */
-    max-height: 300px;
-    /* Define a altura máxima desejada */
-    width: auto;
-    /* Para manter a proporção original da imagem */
-    height: auto;
-    /* Para manter a proporção original da imagem */
-}
+	.button-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-.cropperContainer {
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-	display: none;
-	width: 300px;
-    height: 225px; /* Adicione esta linha para definir a altura */
+    .button-row {
+		margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+	
+	.popupProfile{
+		text-align: center;
+		width: 290px;
+	}
 
-}
+    #selectAnotherButton {
+        width: 92%;
+    }
+	
+	.painel-imprimir-desktop{
+		width: 100%;
+		max-width: 500px;
+	}
+	
+	.class-logoFatura {
+		background-color: white;
+		border-radius: 8px;
+		width: 283px;
+	}
 
-.scrollable-table {
-	max-height: 335px;
-	overflow-y: auto;
-}
 
 /* Estilo para orientação vertical */
 @media (orientation: portrait) {
-    .register-container {
+	
+	/* CSS para centralizar o conteúdo do modal */
+	.modal-content {
+		width: 290px;
+		height: 580px;
+		border-radius: 8px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: white;
+		padding: 20px;
+	}
+
+	.modal-content-crop {
+		width: 285px;
+		height: 490px;
+	}
+
+	.register-container {
        position: absolute;
         top: 0;
 		width: 100%;
-		max-width: 290px;;
+		max-width: 350px;
     }
 
     .class-logo {
        width: 90%
     }
 
+	.popup-content {
+		text-align: center;
+		width: 290px;
+		position: absolute;
+		border-radius: 8px;
+		background: white;
+		padding: 20px;
+	}
+	
+	.painel-imprimir-desktop{
+		width: 100%;
+		max-width: 314px;
+	}
 	
 	.painel-desktop{
+		display: none;
+	}
+	
+	.painel-desktop-carteira{
 		display: none;
 	}
 
 	.painel-mobile{
 		display: block;
+		width: 100%;
+	}
+	
+	.painel-mobile-carteira{
+		display: block;
+		width: 315px;
 	}
 
     .button-secondary {
@@ -250,15 +365,9 @@ body {
 		width: 92%;
 		}
 
-    .popup {
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 240px;
-    }
-
 	.div-extra {
     width: 100%;
-    max-height: 440px;
+    max-height: 550px;
     /* Defina uma altura máxima para evitar ultrapassar a altura da container */
     overflow-y: auto;
 

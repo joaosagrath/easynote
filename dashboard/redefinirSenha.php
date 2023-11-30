@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </head>
     <body>
         <div class="register-container">
-            <img src="../resources/logo-horizontal.gif" alt="Descrição da Imagem" class="class-logo">
+            <img src="../resources/logo-horizontal.png" alt="Descrição da Imagem" class="class-logo">
             <form name="registrationForm" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <input type="text" id="ra" name="ra" placeholder="Digite seu RA (Registro de Aluno)" value="<?php echo $ra; ?>" class="input-field" readonly>
                 <input type="text" id="fullname" name="fullname" value="<?php echo $fullname; ?>" class="input-field" readonly>
@@ -111,5 +111,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </form>
         </div>
         <script src="aluno.js"></script>
+        <script src="utils.js"></script>
     </body>
 </html>
