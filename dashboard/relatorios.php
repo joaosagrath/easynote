@@ -139,7 +139,7 @@ include_once('session/sessao.php')
 													echo "<td>{$row['dataout']}</td>";
 													echo "<td>{$row['observacao']}</td>"; 
 													echo "<td>{$row['status']}</td>";
-													echo "<td>{$row['id_operador']}</td>";
+													echo "<td>{$row['operador']}</td>";
 													
 													echo '</tr>';
 												}
