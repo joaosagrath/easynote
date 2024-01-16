@@ -124,7 +124,9 @@ function updateRP() {
     xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4 && xhr.status == 200) {
 			var responseData = xhr.responseText;
-
+			
+			
+			
 			if (responseData.indexOf("&error=") !== -1) {
 				// Exibir mensagem de erro
 				displayError('Erro: ' + responseData.split("=")[1]);
@@ -151,6 +153,7 @@ function updateRP() {
 function updatePatrimonio() {
 
     clearPatrimonio()
+	
 	
 	var botao = document.getElementById("btnIniciar");
 	botao.disabled = true;
@@ -367,6 +370,13 @@ function displayResultProfessores(variableName, variableValue) {
 		
         if (variableName === "id_professor") {
             id_professor.value = variableValue;
+        }
+		
+		// Se a variável for "id_material", atualize o valor do input
+        var id_material = document.getElementById("id_material");
+		
+        if (variableName === "id_material") {
+            id_material.value = variableValue;
         }
 		
         // Se a variável for "professorNome", atualize o valor do input

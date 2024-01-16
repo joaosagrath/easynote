@@ -1,0 +1,7 @@
+/* Alterar valor de AUTO INCREMENT */
+ALTER TABLE sua_tabela AUTO_INCREMENT = 1;
+
+
+/* valor de coluna */
+UPDATE equipamentos
+SET uso = 0;

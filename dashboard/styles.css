@@ -271,7 +271,7 @@ tr:nth-child(even) {
 
 .styled-table {
     padding: 10px;
-    margin: 10px 0;
+    /* margin: 10px 0; */
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-left: 10px;

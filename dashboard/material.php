@@ -106,12 +106,12 @@ include_once('session/sessao.php')
 									echo '<table id="tabela-materiais" class="styled-table">
 											<thead style="font-size: 13px;">
 												<tr>
-													<th>Sala</th>
-													<th>Controle do Ar</th>
-													<th>Controle do Projetor</th>
-													<th>Marcadores</th>
-													<th>Apagador</th>
-													<th>Observações</th>	
+													<th id="th-sala">Sala</th>
+													<th id="th-controle-ar">Controle do Ar</th>
+													<th id="th-controle-projetor">Controle do Projetor</th>
+													<th id="th-marcadores">Marcadores</th>
+													<th id="th-apagador">Apagador</th>
+													<th id="th-observacao">Observações</th>	
 												</tr>
 											</thead>
 											<tbody style="font-size: 12px;">';

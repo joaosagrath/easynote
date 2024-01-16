@@ -15,8 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = 'Em Andamento';
 
     // Verifica se já existe um empréstimo em andamento com os parâmetros fornecidos
-    $verifica_sql = "SELECT * FROM emprestimos WHERE id_aluno = '$id_aluno' AND id_equipamento = '$id_equipamento' 
-                     AND patrimonio = '$patrimonio' AND ra = '$ra' AND status = 'Em Andamento'";
+    $verifica_sql = "SELECT * FROM emprestimos WHERE id_aluno = '$id_aluno' AND id_equipamento = '$id_equipamento' AND status = 'Em Andamento'";
     $verifica_result = $conn->query($verifica_sql);
 
     if ($verifica_result->num_rows > 0) {
@@ -25,10 +24,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $statusFinalizado = 'Finalizado';
 
         $atualiza_emprestimo = "UPDATE emprestimos SET dataout = '$dataOut', status = '$statusFinalizado' 
-                         WHERE id_aluno = '$id_aluno' AND id_equipamento = '$id_equipamento' 
-                         AND patrimonio = '$patrimonio' AND ra = '$ra' AND status = 'Em Andamento'";
+                         WHERE id_aluno = '$id_aluno' AND id_equipamento = '$id_equipamento' AND status = 'Em Andamento'";
 		
-		$atualiza_equipamento = "UPDATE equipamentos SET observacao = '$observacao' WHERE id_equipamento = '$id_equipamento' AND patrimonio = '$patrimonio'";
+		$atualiza_equipamento = "UPDATE equipamentos SET observacao = '$observacao' WHERE id_equipamento = '$id_equipamento'";
 		
 		// Executa a query de atualização
         if ($conn->query($atualiza_equipamento) === TRUE) {

@@ -231,7 +231,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Adicione um ouvinte de evento ao botão de pesquisa da aba Notebooks
     document.getElementById("botao-pesquisar-materiais").addEventListener("click", function() {
 	
-		
         var filtroSala = inputSala.value;
         var filtroDataInMaterial = inputDataInMaterial.value;
         var filtroDataOutMaterial = inputDataOutMaterial.value;
@@ -263,9 +262,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		
         // Loop através das linhas da tabela para aplicar o filtro
         for (var i = 1; i < linhasMateriais.length; i++) {
-			
-			
-			
+
             var linhaMaterial = linhasMateriais[i];
             var celulas = linhaMaterial.getElementsByTagName('td');
 			
@@ -306,7 +303,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 linhaMaterial.style.display = 'none'; // Oculta a linha se não atender aos critérios de filtro
             }
         }
-    });
+
+		
+	
+	});
 
 	
 	// Adicione um ouvinte de evento ao botão de reset da aba notebooks
@@ -319,6 +319,160 @@ document.addEventListener("DOMContentLoaded", function() {
         resetPesquisa();
     });
 });
+
+
+let colIndexEquipamentos = -1;
+let ascendingEquipamentos = true;
+
+// Função para ordenar os valores da coluna
+function ordenarColunaRelatorios(index) {
+    const tabela = document.getElementById('tabela-relatorios');
+    const tbody = tabela.querySelector('tbody');
+    const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+    ascendingEquipamentos = colIndexEquipamentos === index ? !ascendingEquipamentos : true;
+    colIndexEquipamentos = index;
+
+    linhas.sort((a, b) => {
+        const valorA = a.cells[index].innerText.trim();
+        const valorB = b.cells[index].innerText.trim();
+
+        const compareResult = isNaN(valorA) ? valorA.localeCompare(valorB) : valorB - valorA;
+        return ascendingEquipamentos ? compareResult : -compareResult;
+    });
+
+    tbody.innerHTML = '';
+    linhas.forEach((linha) => tbody.appendChild(linha));
+}
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-emprestimo').addEventListener('click', () => {
+    ordenarColunaRelatorios(0); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-patrimonio').addEventListener('click', () => {
+    ordenarColunaRelatorios(1); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-marca').addEventListener('click', () => {
+    ordenarColunaRelatorios(2); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-modelo').addEventListener('click', () => {
+    ordenarColunaRelatorios(3); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-ra').addEventListener('click', () => {
+    ordenarColunaRelatorios(4); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-aluno').addEventListener('click', () => {
+    ordenarColunaRelatorios(5); // Índice da coluna Marca
+});
+
+document.getElementById('th-cpf').addEventListener('click', () => {
+    ordenarColunaRelatorios(6); // Índice da coluna Marca
+});
+
+document.getElementById('th-curso').addEventListener('click', () => {
+    ordenarColunaRelatorios(7); // Índice da coluna Marca
+});
+
+document.getElementById('th-devolucao').addEventListener('click', () => {
+    ordenarColunaRelatorios(8); // Índice da coluna Marca
+});
+
+document.getElementById('th-observacao').addEventListener('click', () => {
+    ordenarColunaRelatorios(9); // Índice da coluna Marca
+});
+
+document.getElementById('th-status').addEventListener('click', () => {
+    ordenarColunaRelatorios(10); // Índice da coluna Marca
+});
+
+document.getElementById('th-operador').addEventListener('click', () => {
+    ordenarColunaRelatorios(11); // Índice da coluna Marca
+});
+
+let colIndexRetirada = -1;
+let ascendingRetirada = true;
+
+// Função para ordenar os valores da coluna
+function ordenarColunaRetirada(index) {
+    const tabela = document.getElementById('tabela-retirada');
+    const tbody = tabela.querySelector('tbody');
+    const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+    ascendingRetirada = colIndexRetirada === index ? !ascendingRetirada : true;
+    colIndexRetirada = index;
+
+    linhas.sort((a, b) => {
+        const valorA = a.cells[index].innerText.trim();
+        const valorB = b.cells[index].innerText.trim();
+
+        const compareResult = isNaN(valorA) ? valorA.localeCompare(valorB) : valorB - valorA;
+        return ascendingRetirada ? compareResult : -compareResult;
+    });
+
+    tbody.innerHTML = '';
+    linhas.forEach((linha) => tbody.appendChild(linha));
+}
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-retirada').addEventListener('click', () => {
+    ordenarColunaRetirada(0); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-sala').addEventListener('click', () => {
+    ordenarColunaRetirada(1); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-professor').addEventListener('click', () => {
+    ordenarColunaRetirada(2); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-curso-retirada').addEventListener('click', () => {
+    ordenarColunaRetirada(3); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-controle-ar').addEventListener('click', () => {
+    ordenarColunaRetirada(4); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-controle-projetor').addEventListener('click', () => {
+    ordenarColunaRetirada(5); // Índice da coluna Marca
+});
+
+document.getElementById('th-marcadores').addEventListener('click', () => {
+    ordenarColunaRetirada(6); // Índice da coluna Marca
+});
+
+document.getElementById('th-apagador').addEventListener('click', () => {
+    ordenarColunaRetirada(7); // Índice da coluna Marca
+});
+
+document.getElementById('th-devolucao-material').addEventListener('click', () => {
+    ordenarColunaRetirada(8); // Índice da coluna Marca
+});
+
+document.getElementById('th-obs').addEventListener('click', () => {
+    ordenarColunaRetirada(9); // Índice da coluna Marca
+});
+
+document.getElementById('th-status-retirada').addEventListener('click', () => {
+    ordenarColunaRetirada(10); // Índice da coluna Marca
+});
+
+document.getElementById('th-operador-retirada').addEventListener('click', () => {
+    ordenarColunaRetirada(11); // Índice da coluna Marca
+});
+
+
+
 
 function preencherSelectComCursos() {
     // Obtém a tabela e suas linhas
@@ -433,7 +587,6 @@ function preencherSelectComOperadoresMaterial() {
         select.appendChild(option);
     }
 }
-
 
 // Chama a função para preencher o select ao carregar a página
 preencherSelectComCursos();

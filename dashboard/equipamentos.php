@@ -95,13 +95,13 @@ include_once('session/sessao.php')
 							echo '<table id="tabela-equipamentos" class="styled-table">
 									<thead style="font-size: 13px;">
 										<tr>
-											<th>Patrimonio</th>
-											<th>Marca</th>
-											<th>Modelo</th>
-											<th>Status</th>
-											<th>Observações</th>
-											<th>Aquisição</th>
-											<th>Utilizações</th>
+											<th id="th-patrimonio">Patrimonio</th>
+											<th id="th-marca">Marca</th>
+											<th id="th-modelo">Modelo</th>
+											<th id="th-status">Status</th>
+											<th id="th-observacoes">Observações</th>
+											<th id="th-aquisicao">Aquisição</th>
+											<th id="th-utilizacoes">Utilizações</th>
 										</tr>
 									</thead>
 									<tbody style="font-size: 12px;">';
@@ -143,6 +143,7 @@ include_once('session/sessao.php')
                 </div>
             </div>
         </div>
+		
 		<div id="myModalEquipamento" class="modal">
             <div class="modal-content">
 			<form method="post" action="EditarEquipamento.php">

@@ -9,22 +9,7 @@ if ($conn->connect_error) {
 
 // Obter o RA do parâmetro da consulta
 $ra = $_GET['ra'];
-$alunoComEquipamento = true;
 
-if ($alunoComEquipamento) {
-    $sql = "SELECT ra, status FROM emprestimos WHERE ra = $ra AND status = 'Em Andamento'";
-    $result = $conn->query($sql);
-
-    // Verificar se há resultados
-    if ($result->num_rows > 0) {
-		echo "msgAluno=";
-    }
-	else{
-		$alunoComEquipamento = false;
-	}
-}
-
-if (!$alunoComEquipamento) {
     // Consultar o banco de dados
     $sql = "SELECT id_aluno, ra, aluno, cpf, curso FROM alunos WHERE ra = $ra";
     $result = $conn->query($sql);
@@ -39,16 +24,26 @@ if (!$alunoComEquipamento) {
             $aluno = $row['aluno'];
             $cpf = $row['cpf'];
             $curso = $row['curso'];
+			
+			if ($id_aluno !== '') {
+				$sqlEmAndamento = "SELECT id_aluno, status FROM emprestimos WHERE id_aluno = $id_aluno AND status = 'Em Andamento'";
+				$resultEmAndamento = $conn->query($sqlEmAndamento);
 
-            // Retornar as variáveis como texto
-            echo "id_aluno=$id_aluno&ra=$ra&alunoNome=$aluno&alunoCpf=$cpf&alunoCurso=$curso";
-        } else {
-            echo "error=RA não encontrado no banco de dados";
+				// Verificar se há empréstimo em andamento
+				if ($resultEmAndamento->num_rows > 0) {
+					echo "msgAluno=";
+				
+				} else {
+					echo "id_aluno=$id_aluno&ra=$ra&alunoNome=$aluno&alunoCpf=$cpf&alunoCurso=$curso";
+				}
+			}
+			
+		} else {
+			echo "error=RA não encontrado no banco de dados";
         }
     } else {
         echo "error=Erro na consulta: " . $conn->error;
     }
-}
 
 // Fechar a conexão com o banco de dados
 $conn->close();

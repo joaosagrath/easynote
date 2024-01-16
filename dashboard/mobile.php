@@ -90,9 +90,10 @@
                                 function preencherTabelaEmprestimosComBD($raParam) {
                                 	// Inclua o arquivo de configuração
                                 	include('config.php');
+                                    
                                 
                                 	// Query para obter os dados da tabela de equipamentos com filtro por $raParam
-                                	$sql = "SELECT datain, patrimonio, marca, modelo, ra, aluno, cpf, curso, dataout, observacao, status, operador FROM emprestimos WHERE ra = ?";
+                                	$sql = "SELECT datain, id_aluno, id_equipamento, id_operador, dataout, observacao, status FROM emprestimos WHERE ra = ?";
                                 	$stmt = $conn->prepare($sql);
                                 	$stmt->bind_param('s', $raParam);
                                 	$stmt->execute();
@@ -121,20 +122,65 @@
                                 	if ($result->num_rows > 0) {
                                 		// Output dos dados
                                 		while ($row = $result->fetch_assoc()) {
+                                            
+											$id_aluno = $row['id_aluno'];
+											$sqlAlunos = "SELECT ra, aluno, cpf, curso FROM alunos WHERE id_aluno = '$id_aluno'";
+											
+											$resultAlunos = $conn->query($sqlAlunos);
+											if ($resultAlunos->num_rows > 0) {
+												$rowAluno = $resultAlunos->fetch_assoc();
+												$ra = $rowAluno['ra'];
+												$aluno = $rowAluno['aluno'];
+												$cpf = $rowAluno['cpf'];
+												$curso = $rowAluno['curso'];
+											}
+                                            
+                                            $id_equipamento = $row['id_equipamento'];
+											$sqlEquipamemtos = "SELECT patrimonio, marca, modelo, observacao FROM equipamentos WHERE id_equipamento = '$id_equipamento'"; 
+											
+											$resultEquipamentos = $conn->query($sqlEquipamemtos);
+											if ($resultEquipamentos->num_rows > 0) {
+												$rowEquipamento = $resultEquipamentos->fetch_assoc();
+												$patrimonio = $rowEquipamento['patrimonio'];
+												$marca = $rowEquipamento['marca'];
+												$modelo = $rowEquipamento['modelo'];
+												$observacao = $rowEquipamento['observacao'];
+											}
+											
+											$id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+                                            
+                                            $id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+                                            
                                 			echo '<tr onclick="highlightRowRelatorio(this)">';
                                 			echo "<td>{$row['datain']}</td>";
-                                			echo "<td>{$row['patrimonio']}</td>";
-                                			echo "<td>{$row['marca']}</td>";
-                                			echo "<td>{$row['modelo']}</td>";
-                                			echo "<td style='display: none'>{$row['ra']}</td>";
-                                			echo "<td style='display: none'>{$row['aluno']}</td>";
-                                // echo "<td style='display: none'>" . htmlspecialchars($row['aluno']) . "</td>";
-                                			echo "<td style='display: none'>{$row['cpf']}</td>";
-                                			echo "<td style='display: none'>{$row['curso']}</td>";
+                                			echo "<td>{$patrimonio}</td>";
+											echo "<td>{$marca}</td>";
+											echo "<td>{$modelo}</td>";
+
+                                            
+                                            echo "<td style='display: none'>{$ra}</td>";
+											echo "<td style='display: none'>{$aluno}</td>";
+											echo "<td style='display: none'>{$cpf}</td>";
+											echo "<td style='display: none'>{$curso}</td>";
+                                            
                                 			echo "<td>{$row['dataout']}</td>";
                                 			echo "<td>{$row['observacao']}</td>"; 
                                 			echo "<td>{$row['status']}</td>";
-                                			echo "<td>{$row['operador']}</td>";
+                                			echo "<td>{$operador}</td>";
                                 			echo '</tr>';
                                 		}
                                 	} else {
@@ -197,7 +243,7 @@
                             include('config.php');
                         
                             // Query para obter os dados da tabela de equipamentos com filtro por $raParam
-                        $sql = "SELECT datain, patrimonio, marca, modelo, ra, aluno, cpf, curso, dataout, observacao, status, operador FROM emprestimos WHERE ra = ?";
+                        $sql = "SELECT datain, id_aluno, id_equipamento, id_operador, dataout, observacao, status FROM emprestimos WHERE ra = ?";
                         $stmt = $conn->prepare($sql);
                         $stmt->bind_param('s', $raParam);
                         $stmt->execute();
@@ -209,31 +255,77 @@
                         $divs = array();
                         
                             while ($row = $result->fetch_assoc()) {
+                                
+                                $id_aluno = $row['id_aluno'];
+											$sqlAlunos = "SELECT ra, aluno, cpf, curso FROM alunos WHERE id_aluno = '$id_aluno'";
+											
+											$resultAlunos = $conn->query($sqlAlunos);
+											if ($resultAlunos->num_rows > 0) {
+												$rowAluno = $resultAlunos->fetch_assoc();
+												$ra = $rowAluno['ra'];
+												$aluno = $rowAluno['aluno'];
+												$cpf = $rowAluno['cpf'];
+												$curso = $rowAluno['curso'];
+											}
+                                            
+                                            $id_equipamento = $row['id_equipamento'];
+											$sqlEquipamemtos = "SELECT patrimonio, marca, modelo, observacao FROM equipamentos WHERE id_equipamento = '$id_equipamento'"; 
+											
+											$resultEquipamentos = $conn->query($sqlEquipamemtos);
+											if ($resultEquipamentos->num_rows > 0) {
+												$rowEquipamento = $resultEquipamentos->fetch_assoc();
+												$patrimonio = $rowEquipamento['patrimonio'];
+												$marca = $rowEquipamento['marca'];
+												$modelo = $rowEquipamento['modelo'];
+												$observacao = $rowEquipamento['observacao'];
+											}
+											
+											$id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+                                            
+                                            $id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+                                
+                                
                                 $dataIn = $row['datain'];
-                                $patrimonio = $row['patrimonio'];
+                                 /* $patrimonio = $row['patrimonio'];
                                 $marca = $row['marca'];
-                                $modelo = $row['modelo'];
+                                $modelo = $row['modelo']; */
                                 $observacao = $row['observacao'];
-                                // $nome = $row['aluno'];
-                        $nome = mysqli_real_escape_string($conn, $row['aluno']); // Escapar o caractere '
+                                
+                                /* // $nome = $row['aluno'];                        
+                                $nome = mysqli_real_escape_string($conn, $row['aluno']); // Escapar o caractere '
+                                
                                 $cpf = $row['cpf'];
-                                $curso = $row['curso'];
+                                $curso = $row['curso']; */
                                 $status = $row['status'];
                                 $dataOut = $row['dataout'];
-                                $ra = $row['ra'];
-                                $operador = $row['operador'];
+                                /* $ra = $row['ra']; */
+                                /* $operador = $row['operador']; */
                         
                                 // Restante do seu código permanece o mesmo para criar as divs
                         
                                 // Gerar um ID único para cada div
                                 $divID = 'div_' . uniqid();
                         
-                        // Verifique o valor de $status e defina a cor de fundo correspondente
-                        if ($status === "Em Andamento") {
-                        $backgroundColor = '#FA8072'; // Vermelho
-                        } else {
-                        $backgroundColor = '#3CB371'; // Verde (cor padrão)
-                        }
+                                // Verifique o valor de $status e defina a cor de fundo correspondente
+                                if ($status === "Em Andamento") {
+                                $backgroundColor = '#FA8072'; // Vermelho
+                                } else {
+                                $backgroundColor = '#3CB371'; // Verde (cor padrão)
+                                }
                         
                         
                                 // Imprimir a div com o ID gerado
@@ -247,13 +339,13 @@
                                     <script>
                                         var $divID = document.getElementById('$divID');
                                         $divID.addEventListener('click', function() {
-                                            abrirPopup(this, '$marca', '$modelo', '$status', '$dataIn', '$dataOut', '$patrimonio', '$observacao', '$ra', '$nome', '$cpf', '$curso', '$operador');
+                                            abrirPopup(this, '$marca', '$modelo', '$status', '$dataIn', '$dataOut', '$patrimonio', '$observacao', '$ra', '$cpf', '$curso', '$operador');
                                         });
                         
-                        var ra= '$ra'; 
-                        var nome= '$nome'; 
-                        var cpf= '$cpf'; 
-                        var curso= '$curso';
+                                    var ra= '$ra'; 
+                                    
+                                    var cpf= '$cpf'; 
+                                    var curso= '$curso';
                         
                                     </script>";
                             }

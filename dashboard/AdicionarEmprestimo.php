@@ -13,47 +13,37 @@ date_default_timezone_set('America/Sao_Paulo');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Obtenha os valores do formulário
     $id_aluno = $_POST['id_aluno'];
-    $id_equipamento = $_POST['id_equipamento'];
-    $dataIn = date('d/m/Y H:i'); // Formato: "Dia/Mês/Ano Hora:Minuto"
-    $patrimonio = $_POST['patrimonio'];
-    $marca = $_POST['marca'];
-    $modelo = $_POST['modelo'];
-    $operador = $_POST['operador'];
     $ra = $_POST['ra'];
-    $aluno = mysqli_real_escape_string($conn, $_POST["nome"]); // Escapar o caractere '
-    $cpf = $_POST['cpf'];
-    $curso = $_POST['curso'];
+    $id_equipamento = $_POST['id_equipamento'];
+	$id_operador = $_POST['id_operador'];
+    $dataIn = date('d/m/Y H:i'); // Formato: "Dia/Mês/Ano Hora:Minuto"
     $dataOut = '';
     $observacao = $_POST['observacao'];
     $status = 'Em Andamento';
 
     // Verificar se já existe um empréstimo com os mesmos valores
-    $verificacaoSql = "SELECT * FROM emprestimos WHERE (patrimonio = '$patrimonio' OR ra = '$ra') AND status = 'Em Andamento'";
+    $verificacaoSql = "SELECT * FROM emprestimos WHERE (id_aluno = '$id_aluno' OR id_equipamento = '$id_equipamento') AND status = 'Em Andamento'";
 
     $resultadoVerificacao = $conn->query($verificacaoSql);
 
     if ($resultadoVerificacao->num_rows > 0) {
-        echo "Já existe um empréstimo em andamento com esses valores.";
-    } else {
+		header('Location: emprestimo.php?msg=Já existe um empréstimo em andamento para esse Aluno');
+       // echo "Já existe um empréstimo em andamento com esses valores.";
+    
+	} else {
         // Se não existir, proceda com a inserção
         $sql = "INSERT INTO emprestimos (
             id_aluno, 
+            ra,
             id_equipamento, 
+			id_operador,
             datain, 
-            patrimonio, 
-            marca, 
-            modelo, 
-            ra, 
-            aluno, 
-            cpf, 
-            curso,
             dataout,
             observacao,
-            status,
-			operador) VALUES ('$id_aluno', '$id_equipamento', '$dataIn', '$patrimonio', '$marca', '$modelo',
-                            '$ra', '$aluno', '$cpf', '$curso', '$dataOut', '$observacao', '$status', '$operador')";
+            status
+			) VALUES ('$id_aluno', '$ra', '$id_equipamento', '$id_operador', '$dataIn', '$dataOut', '$observacao', '$status' )";
 		
-		$atualiza_equipamento = "UPDATE equipamentos SET observacao = '$observacao' WHERE id_equipamento = '$id_equipamento' AND patrimonio = '$patrimonio'";
+		$atualiza_equipamento = "UPDATE equipamentos SET observacao = '$observacao' WHERE id_equipamento = '$id_equipamento'";
 		
 		// Executa a query de atualização
         if ($conn->query($atualiza_equipamento) === TRUE) {
@@ -70,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             atualizarUsoEquipamentos($conn);
 
             // Chama a função para incrementar a coluna 'emprestimo' na tabela 'alunos'
-            incrementarEmprestimoAlunos($conn, $ra);
+            incrementarEmprestimoAlunos($conn, $id_aluno);
 
             // Redireciona após a chamada das funções
             header('Location: emprestimo.php?msg=Notebook Entregue');
@@ -88,7 +78,7 @@ function atualizarUsoEquipamentos($conn)
             SET uso = (
                 SELECT COUNT(*) 
                 FROM emprestimos 
-                WHERE emprestimos.patrimonio = equipamentos.patrimonio
+                WHERE emprestimos.id_equipamento = equipamentos.id_equipamento
             )";
 
     if ($conn->query($sql) === TRUE) {
@@ -99,12 +89,12 @@ function atualizarUsoEquipamentos($conn)
 }
 
 // Função para incrementar a coluna 'emprestimo' na tabela 'alunos'
-function incrementarEmprestimoAlunos($conn, $ra)
+function incrementarEmprestimoAlunos($conn, $id_aluno)
 {
     // Incrementar a coluna 'emprestimo' na tabela 'alunos'
     $sql = "UPDATE alunos
             SET emprestimo = emprestimo + 1
-            WHERE ra = '$ra'";
+            WHERE id_aluno = '$id_aluno'";
 
     if ($conn->query($sql) === TRUE) {
         //echo "Emprestimo do aluno incrementado com sucesso!";

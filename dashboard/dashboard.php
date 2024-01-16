@@ -105,13 +105,7 @@ include_once('session/sessao.php')
             </div>
         </div>
         <?php
-            // Consulta SQL para buscar o número de patrimônio mais utilizado e os 10 números de patrimônio mais utilizados na tabela equipamentos
-            $queryMaisUtilizado = "SELECT patrimonio, marca, modelo, 
-				SUM(uso) AS total_utilizacoes 
-				FROM equipamentos 
-				GROUP BY patrimonio, marca, modelo 
-				ORDER BY total_utilizacoes 
-				DESC LIMIT 1";
+            
 				
             $queryDezMaisUtilizados = "SELECT patrimonio, marca, modelo, 
 				SUM(uso) AS total_utilizacoes 
@@ -120,12 +114,10 @@ include_once('session/sessao.php')
 				ORDER BY total_utilizacoes 
 				DESC LIMIT 10";
 
-            $queryAlunoMaisAtivo = "SELECT ra, aluno, COUNT(ra) AS total_emprestimos FROM emprestimos GROUP BY ra, aluno ORDER BY total_emprestimos DESC LIMIT 1";
-            $queryCursoMaisAtivo = "SELECT curso, COUNT(curso) AS total_emprestimos FROM emprestimos GROUP BY curso ORDER BY total_emprestimos DESC LIMIT 1";
-            $queryEquipamentosEmAndamento = "SELECT COUNT(patrimonio) AS total_em_andamento FROM emprestimos WHERE status = 'em andamento'";
-            $queryEquipamentosHoje = "SELECT COUNT(patrimonio) AS total_hoje FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') = CURDATE()";
-            $queryEquipamentos7Dias = "SELECT COUNT(patrimonio) AS total_7dias FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()";
-            $queryEquipamentos14Dias = "SELECT COUNT(patrimonio) AS total_14dias FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 14 DAY AND CURDATE()";
+            $queryEquipamentosEmAndamento = "SELECT COUNT(id_equipamento) AS total_em_andamento FROM emprestimos WHERE status = 'em andamento'";
+            $queryEquipamentosHoje = "SELECT COUNT(id_equipamento) AS total_hoje FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') = CURDATE()";
+            $queryEquipamentos7Dias = "SELECT COUNT(id_equipamento) AS total_7dias FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()";
+            $queryEquipamentos14Dias = "SELECT COUNT(id_equipamento) AS total_14dias FROM emprestimos WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 14 DAY AND CURDATE()";
             
             $queryTotalEquipamentos = "SELECT COUNT(patrimonio) AS total_equipamentos FROM equipamentos";
             $queryTotalAlunos = "SELECT COUNT(ra) AS total_alunos FROM alunos";
@@ -142,20 +134,7 @@ include_once('session/sessao.php')
             $totalEquipamentos = 0;
             $totalAlunos = 0;
             
-            // Executa a consulta SQL para o número de patrimônio mais utilizado
-            $resultMaisUtilizado = $conn->query($queryMaisUtilizado);
             
-            if ($resultMaisUtilizado) {
-                $row = $resultMaisUtilizado->fetch_assoc();
-                if ($row) {
-                    $patrimonioMaisUtilizado = array(
-                        'patrimonio' => $row['patrimonio'],
-                        'marca' => $row['marca'],
-                        'modelo' => $row['modelo'],
-                        'total_utilizacoes' => $row['total_utilizacoes']
-                    );
-                }
-            }
             
             // Executa a consulta SQL para os 10 números de patrimônio mais utilizados
             $resultDezMaisUtilizados = $conn->query($queryDezMaisUtilizados);
@@ -171,10 +150,10 @@ include_once('session/sessao.php')
                 }
             }
 			
-			$queryDezSalas = "SELECT sala, COUNT(sala) AS total_sala 
+			$queryDezSalas = "SELECT id_material, COUNT(id_material) AS total_sala 
 				FROM retirada 
 				WHERE STR_TO_DATE(datain, '%d/%m/%Y') BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE() 
-				GROUP BY sala 
+				GROUP BY id_material 
 				ORDER BY total_sala DESC 
 				LIMIT 10";
 
@@ -182,19 +161,63 @@ include_once('session/sessao.php')
             $resultDezSalas = $conn->query($queryDezSalas);
             
             if ($resultDezSalas) {
+				$dezSalas = []; // Inicializa o array de resultados
+
 				while ($row = $resultDezSalas->fetch_assoc()) {
-					$dezSalas[] = array(
-						'sala' => $row['sala'],
-						'salaTotal' => $row['total_sala']
-					);
+					$id_material = $row['id_material'];
+					$total_sala = $row['total_sala'];
+
+					// Consulta para obter o nome da sala com base no id_material
+					$queryNomeSala = "SELECT sala FROM material WHERE id_material = $id_material";
+					$resultNomeSala = $conn->query($queryNomeSala);
+
+					if ($resultNomeSala) {
+						// Se a consulta retornar resultados, obtemos o nome da sala
+						while ($salaRow = $resultNomeSala->fetch_assoc()) {
+							$salaNome = 'Sala: ' . $salaRow['sala'];
+
+							// Adiciona o resultado ao array $dezSalas
+							$dezSalas[] = array(
+								'sala' => $salaNome,
+								'salaTotal' => $total_sala
+							);
+						}
+					}
 				}
 			}
-			
-			
-            
-			
 
+			
+			// Consulta SQL para buscar o número de patrimônio mais utilizado e os 10 números de patrimônio mais utilizados na tabela equipamentos
+            $queryMaisUtilizado = "SELECT patrimonio, marca, modelo, 
+				SUM(uso) AS total_utilizacoes 
+				FROM equipamentos 
+				GROUP BY patrimonio, marca, modelo 
+				ORDER BY total_utilizacoes 
+				DESC LIMIT 1";
+				
+			// Executa a consulta SQL para o número de patrimônio mais utilizado
+            $resultMaisUtilizado = $conn->query($queryMaisUtilizado);
             
+            if ($resultMaisUtilizado) {
+                $row = $resultMaisUtilizado->fetch_assoc();
+                if ($row) {
+                    $patrimonioMaisUtilizado = array(
+                        'patrimonio' => $row['patrimonio'],
+                        'marca' => $row['marca'],
+                        'modelo' => $row['modelo'],
+                        'total_utilizacoes' => $row['total_utilizacoes']
+                    );
+                }
+            }
+			
+            // Consulta SQL para buscar o número de patrimônio mais utilizado e os 10 números de patrimônio mais utilizados na tabela equipamentos
+            $queryAlunoMaisAtivo = "SELECT ra, aluno,
+				SUM(emprestimo) AS total_emprestimo 
+				FROM alunos 
+				GROUP BY ra, aluno 
+				ORDER BY total_emprestimo 
+				DESC LIMIT 1";
+			
             // Executa a consulta SQL para o aluno mais ativo
             $resultAlunoMaisAtivo = $conn->query($queryAlunoMaisAtivo);
             
@@ -204,10 +227,20 @@ include_once('session/sessao.php')
                     $alunoMaisAtivo = array(
                         'ra' => $row['ra'],
                         'aluno' => $row['aluno'],
-                        'total_emprestimos' => $row['total_emprestimos']
+                        'total_emprestimo' => $row['total_emprestimo']
                     );
                 }
             }
+			
+			
+			// Consulta SQL para buscar o número de patrimônio mais utilizado e os 10 números de patrimônio mais utilizados na tabela equipamentos
+            $queryCursoMaisAtivo = "SELECT curso, 
+						COUNT(curso) AS total_emprestimos 
+                        FROM alunos 
+                        GROUP BY curso 
+                        ORDER BY total_emprestimos DESC 
+                        LIMIT 1";
+
             
             // Executa a consulta SQL para o curso mais ativo
             $resultCursoMaisAtivo = $conn->query($queryCursoMaisAtivo);
@@ -293,6 +326,8 @@ include_once('session/sessao.php')
 			foreach ($dezSalas as $index => $sala) {
                 echo "Número da Sala: {$sala['sala']}, total: {$sala['salaTotal']}<br><br>";
             }
+			
+			
             echo "Aluno mais ativo: RA {$alunoMaisAtivo['ra']}, Aluno: {$alunoMaisAtivo['aluno']}, Total de empréstimos: {$alunoMaisAtivo['total_emprestimos']}<br>";
             
             echo "Curso mais ativo: Curso: {$cursoMaisAtivo['curso']}, Total de empréstimos: {$cursoMaisAtivo['total_emprestimos']}<br>";

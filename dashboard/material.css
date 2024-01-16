@@ -3,6 +3,14 @@
     overflow-y: auto;
 }
 
+/* Estilos para manter o cabeçalho fixo */
+.styled-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #ffffff; /* Cor de fundo para o cabeçalho */
+    z-index: 1; /* Para garantir que o cabeçalho fique acima do restante da tabela */
+}
+
 .form-row {
     width: 190px;
     margin-top: 27px;

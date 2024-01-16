@@ -79,13 +79,13 @@ include_once('session/sessao.php')
                                 	echo '<table id="tabela-alunos" class="styled-table">
                                 			<thead style="font-size: 13px;">
                                 				<tr>
-                                					<th>RA</th>
-                                					<th>Nome</th>
-                                					<th>CPF</th>
-                                					<th>Curso</th>
-                                					<th>Email</th>
-                                					<th>Telefone</th>
-                                					<th>Utilizações</th>
+                                					<th id="th-ra">RA</th>
+                                					<th id="th-nome">Nome</th>
+                                					<th id="th-cpf">CPF</th>
+                                					<th id="th-curso">Curso</th>
+                                					<th id="th-email">Email</th>
+                                					<th id="th-telefone">Telefone</th>
+                                					<th id="th-utilizacoes">Utilizações</th>
                                 				</tr>
                                 			</thead>
                                 			<tbody style="font-size: 12px;">';

@@ -86,6 +86,7 @@ include_once('session/sessao.php')
 
 
                             </select>
+							
                         </div>
                         <button id="botao-pesquisar-notebooks" class="button" style="color: black; width: 10%;">Pesquisar</button>
                         <hr>
@@ -97,10 +98,9 @@ include_once('session/sessao.php')
 									include('config.php');
 
 									// Query para obter os dados da tabela de equipamentos
-									$sql = "SELECT datain, patrimonio, marca, modelo, ra, aluno, cpf, curso, dataout, observacao, status, operador FROM emprestimos";
-									
-									
-									
+									$sql = "SELECT id_emprestimos, id_aluno, id_equipamento, id_operador, datain, dataout, status 
+											FROM emprestimos 
+											ORDER BY id_emprestimos DESC";
 									
 									$result = $conn->query($sql);
 
@@ -108,18 +108,18 @@ include_once('session/sessao.php')
 									echo '<table id="tabela-relatorios" class="styled-table">
 											<thead style="font-size: 13px;">
 												<tr>
-													<th>Empréstimo</th>
-                                                    <th>Patrimonio</th>
-                                                    <th>Marca</th>
-                                                    <th>Modelo</th>
-                                                    <th>RA</th>
-													<th>Aluno</th>
-                                                    <th>CPF</th>
-													<th>Curso</th>
-													<th>Devolução</th>
-                                                    <th>Observacao</th>
-													<th>Status</th>
-													<th>Operador</th>
+													<th id="th-emprestimo">Empréstimo</th>
+                                                    <th id="th-patrimonio">Patrimonio</th>
+                                                    <th id="th-marca">Marca</th>
+                                                    <th id="th-modelo">Modelo</th>
+                                                    <th id="th-ra">RA</th>
+													<th id="th-aluno">Aluno</th>
+                                                    <th id="th-cpf">CPF</th>
+													<th id="th-curso">Curso</th>
+													<th id="th-devolucao">Devolução</th>
+                                                    <th id="th-observacao">Observacao</th>
+													<th id="th-status">Status</th>
+													<th id="th-operador">Operador</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="font-size: 12px;">';
@@ -127,22 +127,56 @@ include_once('session/sessao.php')
 									if ($result->num_rows > 0) {
 										// Output dos dados
 										while ($row = $result->fetch_assoc()) {
-													echo '<tr onclick="highlightRowRelatorio(this)">';
-													echo "<td>{$row['datain']}</td>";
-													echo "<td>{$row['patrimonio']}</td>";
-													echo "<td>{$row['marca']}</td>";
-													echo "<td>{$row['modelo']}</td>";
-													echo "<td>{$row['ra']}</td>";
-													echo "<td>{$row['aluno']}</td>";
-													echo "<td>{$row['cpf']}</td>";
-													echo "<td>{$row['curso']}</td>";
-													echo "<td>{$row['dataout']}</td>";
-													echo "<td>{$row['observacao']}</td>"; 
-													echo "<td>{$row['status']}</td>";
-													echo "<td>{$row['operador']}</td>";
-													
-													echo '</tr>';
-												}
+											
+											$id_aluno = $row['id_aluno'];
+											$sqlAlunos = "SELECT ra, aluno, cpf, curso FROM alunos WHERE id_aluno = '$id_aluno'";
+											
+											$resultAlunos = $conn->query($sqlAlunos);
+											if ($resultAlunos->num_rows > 0) {
+												$rowAluno = $resultAlunos->fetch_assoc();
+												$ra = $rowAluno['ra'];
+												$aluno = $rowAluno['aluno'];
+												$cpf = $rowAluno['cpf'];
+												$curso = $rowAluno['curso'];
+											}
+											
+											$id_equipamento = $row['id_equipamento'];
+											$sqlEquipamemtos = "SELECT patrimonio, marca, modelo, observacao FROM equipamentos WHERE id_equipamento = '$id_equipamento'"; 
+											
+											$resultEquipamentos = $conn->query($sqlEquipamemtos);
+											if ($resultEquipamentos->num_rows > 0) {
+												$rowEquipamento = $resultEquipamentos->fetch_assoc();
+												$patrimonio = $rowEquipamento['patrimonio'];
+												$marca = $rowEquipamento['marca'];
+												$modelo = $rowEquipamento['modelo'];
+												$observacao = $rowEquipamento['observacao'];
+											}
+											
+											$id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+											
+											echo '<tr onclick="highlightRowRelatorio(this)">';
+											echo "<td>{$row['datain']}</td>";
+											echo "<td>{$patrimonio}</td>";
+											echo "<td>{$marca}</td>";
+											echo "<td>{$modelo}</td>";
+											echo "<td>{$ra}</td>";
+											echo "<td>{$aluno}</td>";
+											echo "<td>{$cpf}</td>";
+											echo "<td>{$curso}</td>";
+											echo "<td>{$row['dataout']}</td>";
+											echo "<td>{$observacao}</td>"; 
+											echo "<td>{$row['status']}</td>";
+											echo "<td>{$operador}</td>";
+											
+											echo '</tr>';
+										}
 									} else {
 										// Se não houverem resultados
 										echo '<tr><td colspan="7">Nenhum equipamento encontrado</td></tr>';
@@ -195,25 +229,27 @@ include_once('session/sessao.php')
 									include('config.php');
 
 									// Query para obter os dados da tabela de equipamentos
-									$sql = "SELECT datain, sala, professor, curso, controle_ar, controle_projetor, marcadores, apagador, dataout, observacao, status, operador FROM retirada";
+									$sql = "SELECT id_retirada, id_material, id_professor, id_operador, controle_ar, controle_projetor, marcadores, apagador, datain, dataout, observacao, status 
+											FROM retirada
+											ORDER BY id_retirada DESC";
 									$result = $conn->query($sql);
 
 									// Preenche a tabela com os resultados da query
 									echo '<table id="tabela-retirada" class="styled-table">
 											<thead style="font-size: 13px;">
 												<tr>
-													<th>Retirada</th>
-                                                    <th>Sala</th>
-                                                    <th>Professor</th>
-                                                    <th>Curso</th>
-                                                    <th>Controle Ar</th>
-													<th>Controle Projetor</th>
-                                                    <th>Marcadores</th>
-													<th>Apagador</th>
-													<th>Devolução</th>
-                                                    <th>Observacao</th>
-													<th>Status</th>
-													<th>Operador</th>
+													<th id="th-retirada">Retirada</th>
+                                                    <th id="th-sala">Sala</th>
+                                                    <th id="th-professor">Professor</th>
+                                                    <th id="th-curso-retirada">Curso</th>
+                                                    <th id="th-controle-ar">Controle Ar</th>
+													<th id="th-controle-projetor">Controle Projetor</th>
+                                                    <th id="th-marcadores">Marcadores</th>
+													<th id="th-apagador">Apagador</th>
+													<th id="th-devolucao-material">Devolução</th>
+                                                    <th id="th-obs">Observacao</th>
+													<th id="th-status-retirada">Status</th>
+													<th id="th-operador-retirada">Operador</th>
                                                 </tr>
                                             </thead>
                                             <tbody style="font-size: 12px;">';
@@ -222,17 +258,56 @@ include_once('session/sessao.php')
 										// Output dos dados
 										while ($row = $result->fetch_assoc()) {
 											
-													// Convertendo valores booleanos para "true" ou "false"
+											// Convertendo valores booleanos para "true" ou "false"
 											$controle_ar = $row['controle_ar'] ? 'Presente' : 'Faltando';
 											$controle_projetor = $row['controle_projetor'] ? 'Presente' : 'Faltando';
 											$marcadores = $row['marcadores'] ? 'Presente' : 'Faltando';
 											$apagador = $row['apagador'] ? 'Presente' : 'Faltando';
 											
+											$id_material = $row['id_material'];
+											$sqlMateriais = "SELECT sala, controle_ar, controle_projetor, marcadores, apagador, observacao 
+															 FROM material
+															 WHERE id_material = '$id_material'"; 
+											
+											$resultMateriais = $conn->query($sqlMateriais);
+											if ($resultMateriais->num_rows > 0) {
+												$rowMaterial = $resultMateriais->fetch_assoc();
+												$sala = $rowMaterial['sala'];
+												/*// Convertendo valores booleanos para "true" ou "false"
+												$controle_ar = $rowMaterial['controle_ar'] ? 'Presente' : 'Faltando';
+												$controle_projetor = $rowMaterial['controle_projetor'] ? 'Presente' : 'Faltando';
+												$marcadores = $rowMaterial['marcadores'] ? 'Presente' : 'Faltando';
+												$apagador = $rowMaterial['apagador'] ? 'Presente' : 'Faltando';*/
+											
+											}
+											
+											$id_professor = $row['id_professor'];
+											$sqlProfessores = "SELECT rp, professor, curso
+															 FROM professores
+															 WHERE id_professor = '$id_professor'";
+															 
+											$resultProfessores = $conn->query($sqlProfessores);
+											if ($resultProfessores->num_rows > 0) {
+												$rowProfessor = $resultProfessores->fetch_assoc();
+												$professor = $rowProfessor['professor'];
+												$curso = $rowProfessor['curso'];
+											
+											}
+											
+											$id_operador = $row['id_operador'];
+											$sqlOperadores = "SELECT operador FROM operadores WHERE id_operador = '$id_operador'";
+											
+											$resultOperador = $conn->query($sqlOperadores);
+											if ($resultOperador->num_rows > 0) {
+												$rowOperador = $resultOperador->fetch_assoc();
+												$operador = $rowOperador['operador'];
+											}
+											
 													echo '<tr onclick="highlightRowRelatorio(this)">';
 													echo "<td>{$row['datain']}</td>";
-													echo "<td>{$row['sala']}</td>";
-													echo "<td>{$row['professor']}</td>";
-													echo "<td>{$row['curso']}</td>";
+													echo "<td>{$sala}</td>";
+													echo "<td>{$professor}</td>";
+													echo "<td>{$curso}</td>";
 													echo "<td>{$controle_ar}</td>";
 													echo "<td>{$controle_projetor}</td>";
 													echo "<td>{$marcadores}</td>";
@@ -240,7 +315,7 @@ include_once('session/sessao.php')
 													echo "<td>{$row['dataout']}</td>";
 													echo "<td>{$row['observacao']}</td>"; 
 													echo "<td>{$row['status']}</td>";
-													echo "<td>{$row['operador']}</td>";
+													echo "<td>{$operador}</td>";
 													echo '</tr>';
 												}
 									} else {

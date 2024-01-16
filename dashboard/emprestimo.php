@@ -47,6 +47,7 @@ include_once('session/sessao.php')
 			<br>
 			<br>
 			<span id="operador" style="width: 195px; height: 20px; margin-left: 10px; padding: 10px; display: block; color: white"><?PHP echo $_SESSION['operador']; ?></span>
+			<!-- <span id="operador" style="width: 195px; height: 20px; margin-left: 10px; padding: 10px; display: block; color: white"><?PHP echo $_SESSION['id_operador']; ?></span> -->
 			<a href="session/logout.php" id="link-logout" style="font-size: 13px;">SAIR</a>
         </div>
         <div class="content">
@@ -95,7 +96,7 @@ include_once('session/sessao.php')
                             <input type="hidden" name="id_equipamento" id="id_equipamento">
                             <input type="hidden" name="marca" id="marca">
                             <input type="hidden" name="modelo" id="modelo">
-							<input type="hidden" name="operador" id="operador" value="<?PHP echo $_SESSION['operador']; ?>">
+							<input type="hidden" name="id_operador" id="id_operador" value="<?PHP echo $_SESSION['id_operador']; ?>">
                             
                             <!--  -->
                             <input type="text" name="observacao" id="observacao" class="input-field" style="width: 725px; height: 70px; margin-top: 22px" placeholder="Observação">
@@ -128,6 +129,7 @@ include_once('session/sessao.php')
                             <input type="hidden" name="id_professor" id="id_professor">
                             <input type="hidden" name="nomeProfessor" id="nomeProfessor">
                             <input type="hidden" name="cursoProfessor" id="cursoProfessor">
+							<input type="hidden" name="id_operador" id="id_operador" value="<?PHP echo $_SESSION['id_operador']; ?>">
                             <!--  -->
 							
                             <hr style="max-width: 740px; margin-left: auto; margin-right: auto; margin-top: 33px">
@@ -136,7 +138,8 @@ include_once('session/sessao.php')
                                
 							   <div style="display: inline-block; vertical-align: top;">
                                     <input type="number" name="sala" id="sala" class="input-field" style="width: 80px; height: 20px" placeholder="Sala" oninput="updateMaterial()" required min="1">
-                                </div>
+									<input type="hidden" id="id_material" name="id_material">
+							   </div>
                                 
 								<div style="display: inline-block; margin-left: 236px; width: 399px;">
                                     <label class="container"> Controle Ar
@@ -155,6 +158,7 @@ include_once('session/sessao.php')
 										<input type="checkbox" id="Apagador" name="Apagador" value="true">
 										<span style="margin-left: 10px;" class="checkmark" id="span-apagador" name="span-apagador"></span>
                                     </label>
+									
                                 </div>
 								
                             </div>

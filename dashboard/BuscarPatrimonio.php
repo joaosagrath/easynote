@@ -1,6 +1,6 @@
 <?php
 // Conectar ao banco de dados (substitua as informações com as suas)
-include('config.php');
+include "config.php";
 
 // Verificar a conexão
 if ($conn->connect_error) {
@@ -8,71 +8,61 @@ if ($conn->connect_error) {
 }
 
 // Obter o RA do parâmetro da consulta
-$patrimonio = $_GET['patrimonio'];
-$equipamentoEmUso = true;
+$patrimonio = $_GET["patrimonio"];
 
-if ($equipamentoEmUso) {
-    $sql = "SELECT id_aluno, id_equipamento, patrimonio, marca, modelo, ra, aluno, cpf, curso, observacao, status FROM emprestimos WHERE patrimonio = $patrimonio AND status = 'Em Andamento'";
-    $result = $conn->query($sql);
+// Consultar o banco de dados
+$sql = "SELECT id_equipamento, patrimonio, marca, modelo, status, observacao FROM equipamentos WHERE patrimonio = $patrimonio";
 
-    // Verificar se há resultados
-    if ($result->num_rows > 0) {
+$result = $conn->query($sql);
 
-		// Obter os resultados como variáveis separadas
-		$row = $result->fetch_assoc();
-		
-		$id_aluno = $row['id_aluno'];
-		$id_equipamento = $row['id_equipamento'];
-		$patrimonio = $row['patrimonio'];
-		$marca = $row['marca'];
-		$modelo = $row['modelo'];
-		$ra = $row['ra'];
-		$aluno = $row['aluno'];
-		$cpf = $row['cpf'];
-		$curso = $row['curso'];
-		$observacao = $row['observacao'];
-		
-		
-		// Retornar as variáveis como texto
-		echo "id_aluno=$id_aluno&id_equipamento=$id_equipamento&ra=$ra&alunoNome=$aluno&alunoCpf=$cpf&alunoCurso=$curso&equipamentoMarca=$marca&equipamentoModelo=$modelo&observacao=$observacao&msgPatrimonio=";
-	
-	} else {
-		$equipamentoEmUso = false;
-	}
-}
+// Verificar se há resultados
+if ($result->num_rows > 0) {
+    // Obter os resultados como variáveis separadas
+    $row = $result->fetch_assoc();
 
-if (!$equipamentoEmUso) {
-	
-    // Consultar o banco de dados
-	$sql = "SELECT id_equipamento, patrimonio, marca, modelo, status, observacao FROM equipamentos WHERE patrimonio = $patrimonio";
+    $id_equipamento = $row["id_equipamento"];
+    $patrimonio = $row["patrimonio"];
+    $marca = $row["marca"];
+    $modelo = $row["modelo"];
+    $observacao = $row["observacao"];
+    $status = $row["status"];
 
-    $result = $conn->query($sql);
+    if ($status == "Em Manutencao") {
+        echo "warning=Patrimônio não pode ser emprestado";
+    } else {
+        if ($id_patrimonio !== "") {
+			$sqlEmAndamento = "SELECT id_equipamento, id_aluno, status FROM emprestimos WHERE id_equipamento = $id_equipamento AND status = 'Em Andamento'";
+            $resultEmAndamento = $conn->query($sqlEmAndamento);
 
-    // Verificar se há resultados
-    if ($result->num_rows > 0) {
+            // Verificar se há empréstimo em andamento
+            if ($resultEmAndamento->num_rows > 0) {
+                $rowEmAndamento = $resultEmAndamento->fetch_assoc();
+                $id_aluno = $rowEmAndamento["id_aluno"];
 
-		// Obter os resultados como variáveis separadas
-		$row = $result->fetch_assoc();
-		
-		$id_equipamento = $row['id_equipamento'];
-		$patrimonio = $row['patrimonio'];
-		$marca = $row['marca'];
-		$modelo = $row['modelo'];
-		$observacao = $row['observacao'];
-		$status = $row['status'];
-		
-		if ($status ==  'Em Manutencao'){
-			echo 'warning=Patrimônio não pode ser emprestado';
-		} else {			
-			// Retornar as variáveis como texto
-			echo "id_equipamento=$id_equipamento&equipamentoMarca=$marca&equipamentoModelo=$modelo&observacao=$observacao";
-		}
-		
-		
-	
-	} else {
-        echo 'error=Patrimônio não encontrado na tabela "equipamentos"';
+                $sqlAlunos = "SELECT id_aluno, ra, aluno, cpf, curso FROM alunos WHERE id_aluno = '$id_aluno'";
+
+                $resultAlunos = $conn->query($sqlAlunos);
+                if ($resultAlunos->num_rows > 0) {
+                    $rowAluno = $resultAlunos->fetch_assoc();
+                    $id_aluno = $rowAluno["id_aluno"];
+                    $ra = $rowAluno["ra"];
+                    $aluno = $rowAluno["aluno"];
+                    $cpf = $rowAluno["cpf"];
+                    $curso = $rowAluno["curso"];
+                }
+
+                echo "&id_aluno=$id_aluno&id_equipamento=$id_equipamento&ra=$ra&alunoNome=$aluno&alunoCpf=$cpf&alunoCurso=$curso&equipamentoMarca=$marca&equipamentoModelo=$modelo&observacao=$observacao&msgPatrimonio=";
+				
+				//echo "id_aluno: $id_aluno<br>"; // Verificar se $id_aluno está sendo definido corretamente
+				
+			} else {
+                // Retornar as variáveis como texto
+                echo "&id_equipamento=$id_equipamento&equipamentoMarca=$marca&equipamentoModelo=$modelo&observacao=$observacao";
+            }
+        }
     }
+} else {
+    echo 'error=Patrimônio não encontrado na tabela "equipamentos"';
 }
 
 // Fechar a conexão com o banco de dados

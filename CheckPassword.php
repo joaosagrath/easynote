@@ -14,6 +14,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Obter os dados do operador
     $row = $result->fetch_assoc();
+	$id_operador = $row['id_operador'];
     $login = $row['login'];
     $senha = $row['password'];
     $operador = $row['operador'];
@@ -22,6 +23,7 @@ if ($result->num_rows > 0) {
     session_start();
 
     // Definir as variáveis da sessão
+	$_SESSION['id_operador'] = $id_operador;
     $_SESSION['login'] = $login;
     $_SESSION['senha'] = $senha;
     $_SESSION['operador'] = $operador;

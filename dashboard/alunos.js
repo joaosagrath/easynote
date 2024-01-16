@@ -260,3 +260,58 @@ function preencherSelectComCursos() {
 
 // Chama a função para preencher o select ao carregar a página
 preencherSelectComCursos();
+
+let colIndex = -1;
+let ascending = true;
+
+// Função para ordenar os valores da coluna
+function ordenarColuna(index) {
+    const tabela = document.getElementById('tabela-alunos');
+    const tbody = tabela.querySelector('tbody');
+    const linhas = Array.from(tbody.querySelectorAll('tr'));
+
+    ascending = colIndex === index ? !ascending : true;
+    colIndex = index;
+
+    linhas.sort((a, b) => {
+        const valorA = a.cells[index].innerText.trim();
+        const valorB = b.cells[index].innerText.trim();
+
+        const compareResult = isNaN(valorA) ? valorA.localeCompare(valorB) : valorB - valorA;
+        return ascending ? compareResult : -compareResult;
+    });
+
+    tbody.innerHTML = '';
+    linhas.forEach((linha) => tbody.appendChild(linha));
+}
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-ra').addEventListener('click', () => {
+    ordenarColuna(0); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-nome').addEventListener('click', () => {
+    ordenarColuna(1); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-cpf').addEventListener('click', () => {
+    ordenarColuna(2); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-curso').addEventListener('click', () => {
+    ordenarColuna(3); // Índice da coluna Marca
+});
+
+// Adiciona evento de clique para as células do cabeçalho
+document.getElementById('th-email').addEventListener('click', () => {
+    ordenarColuna(4); // Índice da coluna Patrimônio
+});
+
+document.getElementById('th-telefone').addEventListener('click', () => {
+    ordenarColuna(5); // Índice da coluna Marca
+});
+
+document.getElementById('th-utilizacoes').addEventListener('click', () => {
+    ordenarColuna(6); // Índice da coluna Marca
+});
